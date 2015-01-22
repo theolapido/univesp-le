@@ -20,26 +20,6 @@
 \global\atanswersfalse
 
 
-\pagestyle{fancy}
-\lhead{}
-\chead{}
-\rhead{}
-\lfoot{%
-  \color[rgb]{0.137,0.392,0.706}%
-  \fontsize{7.5}{8.5}\selectfont%
-  Física II para engenharia
-  \textbf{/Exercícios das aulas 1--2}}
-\cfoot{}
-\rfoot{%
-  \color[rgb]{0.137,0.392,0.706}%
-  \fontsize{9}{10}\selectfont%
-  \thepage}
-\renewcommand\headrulewidth{0pt}
-\renewcommand\footrulewidth{0.5pt}
-\renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{\footrulewidth}\\[-1em]}} % TODO: -1 em??
-\renewcommand\footruleskip{1pt}
-
-
 \AddEverypageHook{
   \ifthenelse{\equal{\thepage}{1}}{%
     \begin{tikzpicture}[remember picture, overlay]
@@ -48,11 +28,17 @@
       \node (b) at ($(current page.north east) - (1cm,1cm)$) {};
       \filldraw[fill=azul_univesp,even odd rule, draw opacity=0] (current page.south west) rectangle (current page.north east) (a) rectangle (b);
       \node at ($(current page.north east) - (3.4cm,2cm)$) {\includegraphics[width=3cm]{univesp}};
-      \node at ($(a)+(4.2cm,1cm)$) {XX};
+      \node [align=left] at ($(current page.south west)+(5cm,2.4cm)$) [anchor=west] {%
+	  {\color[rgb]{0.137,0.392,0.706}\rule[0.5em]{\textwidth}{0.1pt}}\\%
+	   \color[rgb]{0.137,0.392,0.706}%
+	   \fontsize{7.5}{8.5}\selectfont%
+	   Física II para engenharia
+	   \textbf{/ Exercícios das aulas 1--2}%
+	   \hfill%
+	   \fontsize{9}{10}\selectfont%
+	   \thepage};
     \end{tikzpicture}    
   }{
-    %\restoregeometry
-    %\renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{0.5pt}\\[-1em]}} % TODO: -1 em??    
     \ifatanswers
       \begin{tikzpicture}[remember picture, overlay]
 	\definecolor{outro_azul_univesp}{rgb}{0.870,0.910,0.957};
@@ -66,10 +52,21 @@
 	\node (a) at ($(current page.north west) - (0cm,16.5cm)$) {};
 	\node (b) at ($(current page.north west) + (3.1cm,0cm)$) {};
 	\draw[color=azul_univesp, ultra thick] (a) -- (b);
+	\node[align=left] at ($(current page.south west)+(5cm,1.4cm)$) [anchor=west] {%
+	  {\color[rgb]{0.137,0.392,0.706}\rule[0.5em]{\textwidth}{0.1pt}}\\%
+	   \color[rgb]{0.137,0.392,0.706}%
+	   \fontsize{7.5}{8.5}\selectfont%
+	   Física II para engenharia
+	   \textbf{/ Exercícios das aulas 1--2}%
+	   \hfill%
+	   \fontsize{9}{10}\selectfont%
+	   \thepage};
       \end{tikzpicture}
     \fi
   }%    
 }
+
+
 
 
 
@@ -121,10 +118,6 @@
     \endgroup
     \par
     \setcounter{exercicio}{0}
-    \lfoot{}
-    \cfoot{}
-    \rfoot{}
-    \renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{0pt}\\[-1em]}}
   }{}
 }{}
 
@@ -138,13 +131,9 @@
       \color[rgb]{0.137,0.392,0.706}%
       \fontsize{20pt}{22pt}\selectfont% TODO: verificar
       \uppercase{GABARITO DO MEDIADOR}%
-      \par
-      \setcounter{exercicio}{0}
     \endgroup
-    \lfoot{}
-    \cfoot{}
-    \rfoot{}
-    \renewcommand\footrule{}
+    \par
+    \setcounter{exercicio}{0}
   }{}
 }{}
 
