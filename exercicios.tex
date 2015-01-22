@@ -1,0 +1,195 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{everypage}
+\usepackage[math]{kurier}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+%\usepackage[left=52mm, top=22mm, right=22mm, bottom=22mm]{geometry}
+\usepackage[left=52mm, top=52mm, right=33mm, bottom=33mm, a4paper]{geometry}
+\usepackage{lipsum}
+
+% Para quem é destinado este documento? Se for para o aluno, apenas as respostas dos exercícios serão exibidas; se for para o mediador, a resolução deles será exibida.
+\newcommand\target{aluno}% ou ``mediador''
+
+\newif\ifatanswers
+\global\atanswersfalse
+
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{%
+  \color[rgb]{0.137,0.392,0.706}%
+  \fontsize{7.5}{8.5}\selectfont%
+  Física II para engenharia
+  \textbf{/Exercícios das aulas 1--2}}
+\cfoot{}
+\rfoot{%
+  \color[rgb]{0.137,0.392,0.706}%
+  \fontsize{9}{10}\selectfont%
+  \thepage}
+\renewcommand\headrulewidth{0pt}
+\renewcommand\footrulewidth{0.5pt}
+\renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{\footrulewidth}\\[-1em]}} % TODO: -1 em??
+\renewcommand\footruleskip{1pt}
+
+
+\AddEverypageHook{
+  \ifthenelse{\equal{\thepage}{1}}{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \definecolor{azul_univesp}{rgb}{0.565,0.690,0.843};
+      \node (a) at ($(current page.south west) + (1cm,1cm)$) {};
+      \node (b) at ($(current page.north east) - (1cm,1cm)$) {};
+      \filldraw[fill=azul_univesp,even odd rule, draw opacity=0] (current page.south west) rectangle (current page.north east) (a) rectangle (b);
+      \node at ($(current page.north east) - (3.4cm,2cm)$) {\includegraphics[width=3cm]{univesp}};
+      \node at ($(a)+(4.2cm,1cm)$) {XX};
+    \end{tikzpicture}    
+  }{
+    %\restoregeometry
+    %\renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{0.5pt}\\[-1em]}} % TODO: -1 em??    
+    \ifatanswers
+      \begin{tikzpicture}[remember picture, overlay]
+	\definecolor{outro_azul_univesp}{rgb}{0.870,0.910,0.957};
+	\node (a) at ($(current page.south west) + (1cm,1cm)$) {};
+	\node (b) at ($(current page.north east) - (1cm,1cm)$) {};
+	\filldraw[fill=outro_azul_univesp,even odd rule, draw opacity=0] (a) rectangle (b);
+      \end{tikzpicture}
+    \else
+      \begin{tikzpicture}[remember picture, overlay]
+	\definecolor{azul_univesp}{rgb}{0.565,0.690,0.843};
+	\node (a) at ($(current page.north west) - (0cm,16.5cm)$) {};
+	\node (b) at ($(current page.north west) + (3.1cm,0cm)$) {};
+	\draw[color=azul_univesp, ultra thick] (a) -- (b);
+      \end{tikzpicture}
+    \fi
+  }%    
+}
+
+
+
+
+\newcommand\definedisciplina[1]{%
+  \newcommand\nomedisciplina{\uppercase{#1}}
+}
+
+\newcommand\disciplina{{%
+  \par%
+  \noindent%
+  \bfseries%
+  \color[rgb]{0.137,0.392,0.706}%
+  \fontsize{20pt}{22pt}\selectfont% TODO: verificar
+  \uppercase{\nomedisciplina}%
+}}
+
+\newcommand\aulas[1]{{%
+  \par
+  \noindent%
+  \bfseries%
+  \color[rgb]{0.137,0.392,0.706}%
+  \fontsize{13pt}{15pt}\selectfont % TODO: verificar
+  LISTA DE EXERCÍCIOS DAS AULAS #1
+}}
+
+\newcounter{exercicio}
+\setcounter{exercicio}{0}
+\newcommand\exercicio{{%
+  \refstepcounter{exercicio}%
+  \par\bigskip% TODO: definir um comprimento elástico
+  \noindent%
+  \color[rgb]{0.137,0.392,0.706}%
+  \fontsize{13pt}{15pt}\selectfont % TODO: verificar
+  EXERCÍCIO~\theexercicio%
+  \par%
+}}
+
+\newenvironment{respostas}{
+  \ifthenelse{\equal{\target}{aluno}}{%
+    \pagebreak%
+    \global\atanswerstrue
+    \noindent%
+    \begingroup
+      \bfseries%
+      \color[rgb]{0.137,0.392,0.706}%
+      \fontsize{20pt}{22pt}\selectfont% TODO: verificar
+      \uppercase{GABARITO}%
+    \endgroup
+    \par
+    \setcounter{exercicio}{0}
+    \lfoot{}
+    \cfoot{}
+    \rfoot{}
+    \renewcommand\footrule{{\color[rgb]{0.137,0.392,0.706}\rule{\textwidth}{0pt}\\[-1em]}}
+  }{}
+}{}
+
+\newenvironment{resolucoes}{
+  \ifthenelse{\equal{\target}{mediador}}{%
+    \pagebreak%
+    \global\atanswerstrue
+    \noindent%
+    \begingroup
+      \bfseries%
+      \color[rgb]{0.137,0.392,0.706}%
+      \fontsize{20pt}{22pt}\selectfont% TODO: verificar
+      \uppercase{GABARITO DO MEDIADOR}%
+      \par
+      \setcounter{exercicio}{0}
+    \endgroup
+    \lfoot{}
+    \cfoot{}
+    \rfoot{}
+    \renewcommand\footrule{}
+  }{}
+}{}
+
+\newcommand\foreign[1]{\textsl{#1}}
+
+\AtBeginDocument{
+  %\newgeometry{left=52mm, top=52mm, right=33mm, bottom=33mm}
+  \fontsize{11.5pt}{15pt}\selectfont
+  }% TODO: verificar
+
+
+
+\begin{document}
+  
+  
+
+  \definedisciplina{Física II para engenharia}
+  \disciplina
+  \aulas{1--2}
+  \exercicio \label{ex:ex1} \lipsum[1-5]
+  
+  \newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}
+  
+  \exercicio Teste teste teste. Este exercício faz referência ao ex. \ref{ex:ex1}.
+  
+  \lipsum
+
+\begin{equation*}
+ \frac{\partial \vec g}{\partial t} = -\nabla f + \int_0^{t} h(\lambda)\, d\lambda
+\end{equation*}
+  
+\lipsum[3-4]
+
+% Use o ambiente respostas para as respostas.
+\begin{respostas}
+  \exercicio \lipsum[1-2]
+  \exercicio \lipsum[3-4]
+\end{respostas}
+
+% Use o ambiente resolucoes para as resoluções.
+\begin{resolucoes}
+  \exercicio \lipsum[5-6]
+  \exercicio \lipsum[7-8]
+\end{resolucoes}
+
+
+
+\end{document}
