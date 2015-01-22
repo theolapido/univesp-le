@@ -13,6 +13,8 @@
 \usepackage[left=52mm, top=52mm, right=33mm, bottom=33mm, a4paper]{geometry}
 \usepackage{lipsum}
 
+\pagestyle{empty}
+
 % Para quem é destinado este documento? Se for para o aluno, apenas as respostas dos exercícios serão exibidas; se for para o mediador, a resolução deles será exibida.
 \newcommand\target{aluno}% ou ``mediador''
 
@@ -39,6 +41,7 @@
 	   \thepage};
     \end{tikzpicture}    
   }{
+    %\ifthenelse{\equal{\thepage}{2}}{\newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}}{}  
     \ifatanswers
       \begin{tikzpicture}[remember picture, overlay]
 	\definecolor{outro_azul_univesp}{rgb}{0.870,0.910,0.957};
