@@ -1,0 +1,36 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[math]{kurier}
+\usepackage[T1]{fontenc}
+
+\usepackage[mediador]{univesp}
+
+\usepackage{lipsum}
+
+\title{Título}
+\author{Autor}
+
+\begin{document}
+
+%\maketitle
+
+\definedisciplina{Física II para engenharia}
+\disciplina
+\aulas{1--2}
+  
+\exercicio \lipsum[1]
+\exercicio \lipsum[1-3]
+
+% Use o ambiente respostas para as respostas.
+\begin{respostas}
+  \exercicio \lipsum[1-2]
+  \exercicio \lipsum[3-4]
+\end{respostas}
+
+% Use o ambiente resolucoes para as resoluções.
+\begin{resolucoes}
+  \exercicio \lipsum[5-6]
+  \exercicio \lipsum[7-8]
+\end{resolucoes}
+
+\end{document}
