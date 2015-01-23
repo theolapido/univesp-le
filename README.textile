@@ -1,0 +1,55 @@
+h1. univesp-le
+
+Pacote LaTeX para listas de exercícios da Univesp.
+
+h2. Como utilizar
+
+Copie os arquivos @univesp-le.sty@ e @univesp.jpg@ para a pasta de trabalho.
+Veja um exemplo abaixo:
+
+<pre>
+\documentclass[a4paper]{article}
+\usepackage[utf-8]{inputenc}
+\usepackage{univesp-le}
+
+\disciplina{Nome da disciplina}
+\autor{Nome do professor-autor}
+\aulas{1--2}
+
+\begin{document}
+
+  \maketitle
+  
+  \exercicio\label{ex:qquer} Primeiro exercício.
+  \exercicio Referência ao exercício \label{ex:qquer}.
+  
+  \begin{respostas}
+    \exercicio Resposta do primeiro exercício.
+    ...
+  \end{respostas}
+  
+  \begin{resolucoes}
+    \exercicio Resolução do primeiro exercício.
+    ...
+  \end{resolucoes}
+
+\end{document}
+</pre>
+
+h2. Motivação
+
+Este pacote foi criado com o intuito de simplificar as interações entre a equipe de produção da Univesp
+e os professores-autores usuários de LaTeX.
+
+Para o professor-autor, a produtividade que o LaTeX permite atingir é muito superior àquela que se pode
+obter com _softwares_ como o Microsoft Word, Open Office etc. Por outro lado, para a equipe de _design_
+gráfico o LaTeX é uma "caixa de surpresas" que não se encaixa no _framework_ dela.
+
+Deste modo, o intuito deste projeto é fornecer ao professor-autor um estilo LaTeX que dê conta das
+configurações de _layout_ definidas pela Univesp, sem que ele tenha de se ocupar com isso, conforme
+preconiza o LaTeX.
+
+h2. Licenças
+
+* @univesp.jpg@ - Copyright Univesp
+* Demais arquivos (inclusive @univesp-le.sty@) - "Creative Commons BY-SA International 4.0":http://creativecommons.org/licenses/by-sa/4.0/
