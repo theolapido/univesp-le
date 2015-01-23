@@ -38,16 +38,11 @@ Veja um exemplo abaixo:
 
 h2. Motivação
 
-Este pacote foi criado com o intuito de simplificar as interações entre a equipe de produção da Univesp
-e os professores-autores usuários de LaTeX.
+Este pacote foi criado com o intuito de simplificar as interações entre a equipe de produção da Univesp e os professores-autores usuários de LaTeX.
 
-Para o professor-autor, a produtividade que o LaTeX permite atingir é muito superior àquela que se pode
-obter com _softwares_ como o Microsoft Word, Open Office etc. Por outro lado, para a equipe de _design_
-gráfico o LaTeX é uma "caixa de surpresas" que não se encaixa no _framework_ dela.
+Para o professor-autor, a produtividade que o LaTeX permite atingir é muito superior àquela que se pode obter com _softwares_ como o Microsoft Word, Open Office etc. Por outro lado, para a equipe de _design_ gráfico o LaTeX é uma "caixa de surpresas" que não se encaixa no _framework_ dela.
 
-Deste modo, o intuito deste projeto é fornecer ao professor-autor um estilo LaTeX que dê conta das
-configurações de _layout_ definidas pela Univesp, sem que ele tenha de se ocupar com isso, conforme
-preconiza o LaTeX.
+Deste modo, o intuito deste projeto é fornecer ao professor-autor um estilo LaTeX que dê conta das configurações de _layout_ definidas pela Univesp, sem que ele tenha de se ocupar com isso, conforme preconiza o LaTeX.
 
 h2. Licenças
 
