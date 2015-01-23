@@ -2,17 +2,19 @@
 % Pacote para listas de exercícios da Universidade Virtual do Estado de São Paulo (Univesp)
 % Autor:   Ivan Ramos Pagnossin
 % Data:    Janeiro de 2015
-% Licença: Creative Commons CC-BY-SA Brazil 3.0
+% Licença: Creative Commons BY-SA Brazil 3.0
 %
 % Package for lists of exercises of Universidade Virtual do Estado de São Paulo (Univesp)
 % Author:  Ivan Ramos Pagnossin
 % Date:    January 2015
-% License: Creative Commons CC-BY-SA Brazil 3.0
+% License: Creative Commons BY-SA Brazil 3.0
 % -----------------------------------------------------------------------------------------
 \ProvidesPackage{univesp-le}[2015/01/22 v0.1 - Lista de exercícios da Univesp]
 \RequirePackage{ifthen}
 \RequirePackage{everypage}
-\RequirePackage[left=52mm, top=52mm, right=33mm, bottom=33mm, a4paper]{geometry}
+%\RequirePackage[left=52mm, top=52mm, right=33mm, bottom=33mm]{geometry} % Configuração da página 1
+%\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=22mm]{geometry} % Configuração das demais páginas
+\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=33mm]{geometry}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{environ}
@@ -20,11 +22,24 @@
 % Flags
 \newif\if@univesp@showanswer
 \newif\if@univesp@showsolution
-\newif\if@univesp@atanswer
 \newif\if@univesp@aulasdefined
+\newif\if@univesp@atquery
+\newif\if@univesp@atanswer
+\newif\if@univesp@atsolution
+\newif\if@univesp@atbluepages
+
+\global\@univesp@showanswerfalse
+\global\@univesp@showsolutionfalse
+\global\@univesp@aulasdefinedfalse
+\global\@univesp@atquerytrue
+\global\@univesp@atanswerfalse
+\global\@univesp@atsolutionfalse
+\global\@univesp@atbluepagesfalse
 
 % Contadores
 \newcounter{exercicio}
+\newcounter{answer}
+\newcounter{solution}
 
 % Paleta de cores
 \definecolor{foregroundblue}{rgb}{0.137,0.392,0.706}
@@ -42,7 +57,7 @@
 \def\@univesp@answerstitle{Gabarito}
 \def\@univesp@solutiontitle{Gabarito do mediador}
 
-\global\@univesp@atanswerfalse
+
 
 % Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{mediador}{%
@@ -85,7 +100,7 @@
 }
 
 % Nas mudanças de página (\shipout's), altera a decoração da página.
-\AddEverypageHook{
+\AddEverypageHook{%
   \ifthenelse{\equal{\thepage}{1}}{%
     % Decoração da primeira página
     \begin{tikzpicture}[remember picture, overlay]
@@ -96,7 +111,7 @@
       \node [align=left] at ($(current page.south west)+(50mm,24mm)$) [anchor=west] {\@univesp@foot};
     \end{tikzpicture}
   }{%
-    \if@univesp@atanswer
+    \if@univesp@atbluepages
       % Decoração das páginas de gabarito
       \begin{tikzpicture}[remember picture, overlay]	
 	\node (a) at ($(current page.south west) + (10mm,10mm)$) {};
@@ -117,14 +132,25 @@
 
 % Use o comando \exercicio para iniciar um novo exercício.
 \providecommand\exercicio{%
-  \refstepcounter{exercicio}
+  \if@univesp@atquery
+    \refstepcounter{exercicio}% TODO: um contador para os enunciados, outro para as respostas e outro para as resoluções
+    \gdef\@univesp@exercisecount{\theexercicio}
+  \else
+    \if@univesp@atanswer
+      \refstepcounter{answer}
+      \gdef\@univesp@exercisecount{\theanswer}
+    \else
+      \refstepcounter{solution}
+      \gdef\@univesp@exercisecount{\thesolution}
+    \fi
+  \fi
   \par\vspace{\@univesp@exerciseskip}
   \addpenalty{-300}
   \noindent
   \begingroup
     \mdseries\upshape\fontsize{13pt}{14.9pt}\selectfont
     \color{foregroundblue}%
-    \MakeUppercase{\@univesp@exerciselabel~\theexercicio}%
+    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
   \endgroup
   \par
   \addpenalty{+300}
@@ -134,7 +160,10 @@
 \NewEnviron{respostas}{
   \if@univesp@showanswer
     \newpage
+    \global\@univesp@atqueryfalse%
     \global\@univesp@atanswertrue%
+    \global\@univesp@atsolutionfalse%
+    \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
       \bfseries\upshape\fontsize{20pt}{23pt}\selectfont
@@ -151,7 +180,10 @@
 \NewEnviron{resolucoes}{
   \if@univesp@showsolution
     \newpage
-    \global\@univesp@atanswertrue%
+    \global\@univesp@atqueryfalse%
+    \global\@univesp@atanswerfalse%
+    \global\@univesp@atsolutiontrue%
+    \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
       \bfseries\upshape\fontsize{20pt}{23pt}\selectfont
@@ -188,7 +220,8 @@
 
 % Redefine o comando \maketitle para exibir o nome da disciplina, as aulas às quais os exercícios se referem e o professor autor da lista.
 \renewcommand\maketitle{
-  \par\noindent
+  \par\vspace*{30mm}%
+  \noindent
   \begingroup
     \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{23pt}\selectfont
     \MakeUppercase{\@univesp@disciplina}%
@@ -210,10 +243,26 @@
 % Então, por enquanto isso deve ser feito manualmente, inserindo o comando
 % \reshape na segunda página do documento.
 \providecommand\reshape{\newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}}
+%
+% Para resolver o problema acima, o mais próximo que consegui foi o código abaixo, inspirado em:
+% http://tex.stackexchange.com/questions/212938/change-page-layout-at-begin-of-each-page
+% Ainda assim, não funciona corretamente: parece que o pacote geometry está se perdendo ao reconfigurar a página,
+% pois as margens mudam, mas não como deveriam.
+%
+%\let\@@outputpage\@outputpage
+%\def\@outputpage{\expandafter\@thisgeometry\@@outputpage}
+%\gdef\@thisgeometry{%
+%  \ifthenelse{\thepage>1}{%
+%    \newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}%
+%  }{}
+%}
+
+% Família-padrão da fonte: sem serifa
+\renewcommand*\familydefault{\sfdefault}
 
 % Define a fonte padrão do documento.
 \AtBeginDocument{%
-  \mdseries\upshape\fontsize{11.5pt}{13.2pt}\selectfont
+  \sffamily\mdseries\upshape\fontsize{11.5pt}{13.2pt}\selectfont
 }
 
 \endinput

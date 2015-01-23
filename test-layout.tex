@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 % Fonte sem serifa com suporte a expressões matemáticas
-\usepackage[math]{kurier}
+\usepackage[sfmath]{kpfonts}
 \usepackage[T1]{fontenc}
 
 % Pacote que define o layout da lista de exercícios
@@ -10,7 +10,7 @@
 % professor   Exibe as respostas e as resoluções (PADRÃO)
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
-\usepackage[professor]{univesp-le}
+\usepackage[aluno]{univesp-le}
 
 % REMOVER. Usado apenas para gerar texto lipsum
 \usepackage{lipsum}
@@ -22,27 +22,41 @@
 
 \begin{document}
 
-% Imprime o 
+% Imprime o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
 \maketitle
  
 % Cada \exercicio inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
-\exercicio \lipsum[1-3]
-\exercicio \label{ex:um.exercicio.qualquer}
-  Este é um exemplo de exercício que contém expressões matemáticas nele, tais como $y(x,t) = \cos(\omega t)\cos(k x)$.
-  Aliás, esse exercício define um rótulo, que pode ser referenciado depois.
-\exercicio Citando o ex.~\ref{ex:um.exercicio.qualquer}
-\exercicio \lipsum[4-5]
+\exercicio \lipsum[1-2]
+\exercicio \lipsum[3]
+\exercicio Teste teste
+\exercicio Teste teste
+\exercicio Teste teste
+\exercicio \lipsum[4]
+\exercicio \lipsum[5-8]
+\exercicio \lipsum[10]
 
 % Use o ambiente respostas para as respostas.
 \begin{respostas}
-  \exercicio \lipsum[1]
-  \exercicio \lipsum[2]
+  \exercicio \lipsum[1-2]
+  \exercicio \lipsum[3]
+  \exercicio \lipsum[4]
+  \exercicio \lipsum[5-8]
+  \exercicio Teste teste
+  \exercicio Teste teste
+  \exercicio Teste teste
+  \exercicio \lipsum[10]
 \end{respostas}
 
 % Use o ambiente resolucoes para as resoluções.
 \begin{resolucoes}
-  \exercicio \lipsum[5]
-  \exercicio \lipsum[6]
+  \exercicio \lipsum[1-2]
+  \exercicio \lipsum[3]
+  \exercicio \lipsum[4]
+  \exercicio \lipsum[5-8]
+  \exercicio \lipsum[9]
+  \exercicio Teste teste
+  \exercicio Teste teste
+  \exercicio Teste teste
 \end{resolucoes}
 
 \end{document}
