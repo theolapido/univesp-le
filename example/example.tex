@@ -2,15 +2,18 @@
 \usepackage[utf8]{inputenc}
 
 % Fonte sem serifa com suporte a expressões matemáticas
-\usepackage{cmbright}
+%\usepackage{cmbright}
 \usepackage[T1]{fontenc}
+\usepackage[sfdefault]{AlegreyaSans}
+\usepackage{sfmath}
+\usepackage{sansmathaccent}
 
 % Pacote que define o layout da lista de exercícios
 % Opções:
 % professor   Exibe as respostas e as resoluções (PADRÃO)
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
-\usepackage[professor]{univesp-le}
+\usepackage[mediador]{univesp-le}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -19,6 +22,7 @@
 \usepackage{wasysym}
 \usepackage{hyperref}
 \usepackage{booktabs}
+
 
 % Definições personalizadas
 \newcommand\myrightarrow{\quad\Rightarrow\quad}
@@ -33,50 +37,73 @@
 % Imprime o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
 \maketitle
  
-% Cada \exercicio inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
+% Cada  inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
 %-----------------------------------------------------
-\exercicio (a) Determine a força gravitacional que atrai um homem de \SI{65}{kg} a uma mulher de \SI{50}{kg} quando eles estão afastados de \SI{0.5}{m} (considere-os como partículas pontuais). (b) Qual é a energia potencial gravitacional dessa interação?
-  
-\exercicio \textbf{(para o portfólio)} Qual é a aceleração de queda livre de um corpo a uma altitude correspondente à órbita de um veículo espacial, a cerca de \SI{400}{km} acima da superfície da Terra?
+\begin{exercicio}
+  (a) Determine a força gravitacional que atrai um homem de \SI{65}{kg} a uma mulher de \SI{50}{kg} quando eles estão afastados de \SI{0.5}{m} (considere-os como partículas pontuais). (b) Qual é a energia potencial gravitacional dessa interação? 
+\end{exercicio}
 
-\exercicio Determine a velocidade de escape na superfície de Mercúrio, que possui massa de \SI{3.31e23}{kg} e raio de \SI{2440}{km}.
+\begin{exercicio*}
+  Qual é a aceleração de queda livre de um corpo a uma altitude correspondente à órbita de um veículo espacial, a cerca de \SI{400}{km} acima da superfície da Terra?
+\end{exercicio*}
 
-\exercicio Europa é um satélite do planeta Júpiter, cujo raio é \SI{1569}{km} e a aceleração da gravidade, na sua superfície, de \SI{1.39}{m/s^2}.
+\begin{exercicio}
+ Determine a velocidade de escape na superfície de Mercúrio, que possui massa de \SI{3.31e23}{kg} e raio de \SI{2440}{km}.
+\end{exercicio}
+
+\begin{exercicio}
+ Europa é um satélite do planeta Júpiter, cujo raio é \SI{1569}{km} e a aceleração da gravidade, na sua superfície, de \SI{1.39}{m/s^2}.
 \begin{compactenum}[(a)]
 \item Calcule a velocidade de escape de Europa.
 \item Que altura um objeto alcançaria se fosse lançado para cima com uma velocidade de \SI{1.01}{km/s}?
 \item Com que velocidade um objeto atingiria o satélite se ele fosse largado de uma altura de \SI{1000}{km}?
 \item Calcule a massa de Europa.
 \end{compactenum}
+\end{exercicio}
 
-\exercicio Um projétil é lançado em linha reta para cima, a partir da superfície da Terra, com velocidade \SI{15}{km/s}.
+\begin{exercicio}
+ Um projétil é lançado em linha reta para cima, a partir da superfície da Terra, com velocidade \SI{15}{km/s}.
 Determine a velocidade do projétil quando ele estiver bem afastado da Terra (ignore a resistência do ar. O raio da Terra é \SI{6370}{km}).
+\end{exercicio}
 
-\exercicio O asteróide Eros, um dos muitos ``planetas menores'' que orbitam o Sol na região entre Marte e Júpiter, tem raio de \SI{7}{km} e massa \SI{5e15}{kg}.
+\begin{exercicio}
+ O asteróide Eros, um dos muitos ``planetas menores'' que orbitam o Sol na região entre Marte e Júpiter, tem raio de \SI{7}{km} e massa \SI{5e15}{kg}.
 \begin{compactenum}[(a)]
 \item Se você estivesse em Eros, poderia levantar uma caminhonete de \SI{2000}{kg}?
 \item Você poderia correr rápido o suficiente para escapar da atração gravitacional de Eros?\footnote{Nota: os recordes olímpicos de tempo para a corrida de \SI{400}{m} é de \SI{43.49}{s} para homens (Michael Johnson --- EUA, 1996) e de \SI{48.26}{s} para mulheres (Marie-José Pérec --- França, 1996).}
 \end{compactenum}
+\end{exercicio}
 
-\exercicio Duas partículas puntiformes, cada uma com massa $M$, são fixadas sobre o eixo $y$ em $y=+a$ e $y=-a$.
+\begin{exercicio}
+ Duas partículas puntiformes, cada uma com massa $M$, são fixadas sobre o eixo $y$ em $y=+a$ e $y=-a$.
 Determine o campo gravitacional $\vec g$ para todos os pontos sobre o eixo $x$, como função de $x$.
+\end{exercicio}
 
-\exercicio Considere um sistema isolado formado por três esferas. Duas delas, de massas $m_1 = \SI{7.16}{kg}$ e $m_2 = \SI{2.53}{kg}$, são separadas por uma distância de centro a centro de \SI{1.56}{m}. A terceira, de massa $m_3 = \SI{212}{g}$, está posicionada a \SI{42}{cm} do centro da esfera $m_2$, ao longo da linha que liga os centros.
+\begin{exercicio}
+ Considere um sistema isolado formado por três esferas. Duas delas, de massas $m_1 = \SI{7.16}{kg}$ e $m_2 = \SI{2.53}{kg}$, são separadas por uma distância de centro a centro de \SI{1.56}{m}. A terceira, de massa $m_3 = \SI{212}{g}$, está posicionada a \SI{42}{cm} do centro da esfera $m_2$, ao longo da linha que liga os centros.
 \begin{compactenum}[(a)]
 \item Quanto trabalho deve ser realizado por um agente externo para mover a esfera $m_3$ ao longo da linha que liga os centros e posicioná-la a \SI{42}{cm} do centro da esfera $m_1$.
 \item Se $m_3$ fosse levado à sua posição final por outro caminho, esse resultado seria diferente? Por quê?
 \end{compactenum}
+\end{exercicio}
 
-\exercicio Desafio: mostre que a energia total de um objeto em órbita circular é igual à metade de sua energia potencial gravitacional.
+\begin{exercicio}
+ Desafio: mostre que a energia total de um objeto em órbita circular é igual à metade de sua energia potencial gravitacional.
 Nota: numa órbita circular, a velocidade orbital permanece constante.
+\end{exercicio}
 
+\begin{exercicio}
 % Leis de Kepler
-\exercicio O semi-eixo maior da órbita de Júpiter é \SI{5.2}{UA} (unidades astronômicas).\footnote{\SI{1}{UA} = \SI{149 597 871}{km}. Note, entretanto, que você não precisa dessa informação para resolver o exercício.}
+ O semi-eixo maior da órbita de Júpiter é \SI{5.2}{UA} (unidades astronômicas).\footnote{\SI{1}{UA} = \SI{149 597 871}{km}. Note, entretanto, que você não precisa dessa informação para resolver o exercício.}
 Sabendo que o semi-eixo maior da órbita da Terra é \SI{1}{UA}, qual é o período de translação de Júpiter, em anos terrestres?
+\end{exercicio}
 
-\exercicio O período de Netuno é de 164,8 anos terrestres. Qual é o valor de sua distância média ao Sol, em unidades astronômicas (UA)?
+\begin{exercicio}
+ O período de Netuno é de 164,8 anos terrestres. Qual é o valor de sua distância média ao Sol, em unidades astronômicas (UA)?
+\end{exercicio}
 
-\exercicio Procure na Internet pelo período $T$ de translação e pelo semi-eixo maior $a$ da órbita de cada planeta do Sistema Solar.\footnote{Ao invés do semi-eixo maior da órbita, você também pode utilizar a distância média entre o planeta e o Sol.}
+\begin{exercicio}
+ Procure na Internet pelo período $T$ de translação e pelo semi-eixo maior $a$ da órbita de cada planeta do Sistema Solar.\footnote{Ao invés do semi-eixo maior da órbita, você também pode utilizar a distância média entre o planeta e o Sol.}
 \begin{compactenum}[(a)]
 \item Faça um gráfico de $T \times a$.
 
@@ -90,38 +117,66 @@ e o outro para Júpiter, Saturno, Urano, Netuno e Plutão.}
 \item No gráfico do item anterior, os pontos alinham-se. Qual é o valor do coeficiente angular, no Sistema Internacional de Unidades (SI)?
 Compare-o com a constante $4\pi^2/(GM_{\astrosun})$, onde $G = \SI{6.67e-11}{N.m^2/kg^2}$ é a constante universal da gravidade e $M_{\astrosun} = \SI{1.99e30}{kg}$ é a massa do Sol.
 \end{compactenum}
+\end{exercicio}
 
-\exercicio A Estação Espacial Internacional move-se aproximadamente segundo uma órbita circular em torno da Terra.
+\begin{exercicio}
+ A Estação Espacial Internacional move-se aproximadamente segundo uma órbita circular em torno da Terra.
 Considerando que ela esteja a \SI{385}{km} acima da superfície da Terra, qual é o período da órbita?
+\end{exercicio}
 
-\exercicio \textbf{(para o portfólio)} Júpiter é o maior planeta do Sistema Solar. Sua massa é de $M_{\jupiter}=\SI{1.9e27}{kg}$ (318 vezes mais massivo que a Terra) e possui mais de cinquenta luas (satélites naturais) conhecidas. As quatro maiores delas, visíveis da Terra com um pequeno telescópio e descobertas por Galileu Galilei no século XVII, são: Io, Europa, Ganimedes e Calisto. Você, ao reproduzir a observação de Galileu, mediu os seguintes períodos de revolução em torno de Júpiter: \SI{42.5}{h} para Io, \SI{85.2}{h} para Europa, \SI{171.6}{h} para Ganimedes e \SI{400.6}{h} para Calisto.  
+\begin{exercicio*}
+ Júpiter é o maior planeta do Sistema Solar. Sua massa é de $M_{\jupiter}=\SI{1.9e27}{kg}$ (318 vezes mais massivo que a Terra) e possui mais de cinquenta luas (satélites naturais) conhecidas. As quatro maiores delas, visíveis da Terra com um pequeno telescópio e descobertas por Galileu Galilei no século XVII, são: Io, Europa, Ganimedes e Calisto. Você, ao reproduzir a observação de Galileu, mediu os seguintes períodos de revolução em torno de Júpiter: \SI{42.5}{h} para Io, \SI{85.2}{h} para Europa, \SI{171.6}{h} para Ganimedes e \SI{400.6}{h} para Calisto.  
 Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, monte o gráfico $T^2 \times a^3$ desse sistema planetário.
+\end{exercicio*}
 
 % Use o ambiente respostas para as respostas.
 \begin{respostas}
-  \exercicio (a) \SI{8.67e-7}{N}; (b) \SI{-4.33e-7}{J}.
+  \begin{exercicio}
+   (a) \SI{8.67e-7}{N}; (b) \SI{-4.33e-7}{J}.
+  \end{exercicio}
   
-  \exercicio Resposta não disponível: este exercício faz parte do portfólio.
+  \begin{exercicio*}
+    \SI{8.7}{m/s^2}
+  \end{exercicio*}
   
-  \exercicio \SI{4.25}{km/s}.
+  \begin{exercicio}
+   \SI{4.25}{km/s}.
+  \end{exercicio}
   
-  \exercicio (a) \SI{2.09}{km/s}; (b) \SI{478.9}{km/s}; (c) \SI{1.303}{km/s}; (d) \SI{5.13e22}{kg}.
+  \begin{exercicio}
+   (a) \SI{2.09}{km/s}; (b) \SI{478.9}{km/s}; (c) \SI{1.303}{km/s}; (d) \SI{5.13e22}{kg}.
+  \end{exercicio}
 
-  \exercicio \SI{10}{km/s}.
+  \begin{exercicio}
+   \SI{10}{km/s}.
+  \end{exercicio}
   
-  \exercicio (a) Sim; (b) Não.
+  \begin{exercicio}
+   (a) Sim; (b) Não.
+  \end{exercicio}
   
-  \exercicio $\vec g = -\frac{2GMx}{\left(x^2 + a^2\right)^{3/2}}\hat i$
+  \begin{exercicio}
+   $\vec g = -\frac{2GMx}{\left(x^2 + a^2\right)^{3/2}}\hat i$
+  \end{exercicio}
   
-  \exercicio (a) \SI{9.845e-11}{J}; (b) Não.
+  \begin{exercicio}
+   (a) \SI{9.845e-11}{J}; (b) Não.
+  \end{exercicio}
   
-  \exercicio Dica: a aceleração centrípeta que sustenta a órbita circular é devida à gravidade.
+  \begin{exercicio}
+   Dica: a aceleração centrípeta que sustenta a órbita circular é devida à gravidade.
+  \end{exercicio}
   
-  \exercicio $11,9$ anos terrestres.
+  \begin{exercicio}
+   $11,9$ anos terrestres.
+  \end{exercicio}
   
-  \exercicio \SI{30.1}{UA}.
+  \begin{exercicio}
+   \SI{30.1}{UA}.
+  \end{exercicio}
   
-  \exercicio 
+  \begin{exercicio}
+   
   
   \begin{compactenum}[(a)]
   \item {}\hfill
@@ -142,15 +197,24 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \item O coeficiente angular é igual a $4\pi^2/(GM_{\astrosun}) = \SI{2.97e-19}{s^2/m^3}$.
   
   \end{compactenum}
-
-  \exercicio \SI{92.1}{min}.
+  \end{exercicio}
   
-  \exercicio Resposta não disponível: este exercício faz parte do portfólio.
+  \begin{exercicio}
+   \SI{92.1}{min}.
+  \end{exercicio}
+  
+  \begin{exercicio*}
+    \begin{center}
+      \includegraphics[width=0.5\textwidth]{Io_cia}
+    \end{center}
+  \end{exercicio*}
 \end{respostas}
 
 % Use o ambiente resolucoes para as resoluções.
 \begin{resolucoes}
-\exercicio
+
+  \begin{exercicio}
+
   \begin{compactenum}[(a)]
   
   \item O módulo da força de interação gravitacional entre dois corpos puntiformes é dado pela lei da gravitação universal de Newton:
@@ -164,8 +228,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   U_g = -\frac{Gm_{\mars}m_{\venus}}{r} = -\frac{6,67\times10^{-11}\cdot65\cdot50}{0,5} = \SI{-4.33e-7}{\joule}.
   \end{equation*}
   \end{compactenum}
-
-  \exercicio O módulo da força gravitacional entre um corpo de massa $m$ e a Terra (massa é $M = \SI{5.98e24}{\kilo\gram}$) é dada pela lei da gravitação universal de Newton:
+  \end{exercicio}
+  
+  \begin{exercicio*}
+   O módulo da força gravitacional entre um corpo de massa $m$ e a Terra (massa é $M = \SI{5.98e24}{\kilo\gram}$) é dada pela lei da gravitação universal de Newton:
   $F = GmM/r^2$, onde $r$ é a distância entre esse corpo e o centro da Terra.
   Essa força causa uma aceleração em $m$, dada pela segunda lei de Newton: 
   \begin{equation*}
@@ -178,8 +244,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   a = \frac{GM}{(R + h)^2} = \frac{6,67\times10^{-11}\cdot 5,98\times10^{24}}{\left(6,37\times10^{6}+0,4\times10^{6}\right)^2} = \SI{8.7}{m/s^2},
   \end{equation*}
   que é a aceleração de queda livre (aquela associada à gravidade).
-
-  \exercicio A velocidade de escape $v_e$ de Mercúrio é, por definição, a velocidade mínima que um corpo deve ter, na superfície, para conseguir livrar-se se sua atração gravitacional.
+  \end{exercicio*}
+  
+  \begin{exercicio}
+   A velocidade de escape $v_e$ de Mercúrio é, por definição, a velocidade mínima que um corpo deve ter, na superfície, para conseguir livrar-se se sua atração gravitacional.
   ``Livrar-se da sua atração gravitacional'' significa que, no infinito, sua energia cinética terá toda ela sido convertida em energia potencial gravitacional. Ou seja, no infinito temos $K = 0$ (energia cinética nula). Mas no infinito, também a energia potencial gravitacional é nula: 
   \begin{equation*}
   U_g = -\frac{GMm}{r} \myrightarrow \lim_{r \to \infty} U_g = 0.
@@ -196,9 +264,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \begin{equation*}
   v_e = \sqrt{\frac{2GM}{R}} = \sqrt{\frac{ 2 \cdot 6,67\times10^{-11} \cdot 3,31\times10^{23} }{2,44 \times10^{6}}} = \SI{4.25}{\kilo\metre\per\second}.
   \end{equation*}
-
+  \end{exercicio}
   
-  \exercicio
+  \begin{exercicio}
+  
   \begin{compactenum}[(a)]
   \item A força gravitacional entre Europa e um corpo de massa $m$ na sobre a sua superfície é dada pela lei da gravitação universal de Newton: $F = GMm/R^2$, onde $R$ é o raio de Europa.
   Pela segunda lei de Newton, essa força causa uma aceleração $g = F/m = GM/R^2$ que, pelo enunciado do exercício, é igual a \SI{1.39}{m/s^2}.
@@ -253,9 +322,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \end{equation*}
   
   \end{compactenum}
-
+  \end{exercicio}
   
-  \exercicio Considere as duas situações $A$ e $B$: em $A$ o projétil está na superfície da Terra ($r = R = \SI{6.37e6}{\metre}$) e sua velocidade é $v_A = \SI{1.5e4}{\metre\per\second}$;
+  \begin{exercicio}
+   Considere as duas situações $A$ e $B$: em $A$ o projétil está na superfície da Terra ($r = R = \SI{6.37e6}{\metre}$) e sua velocidade é $v_A = \SI{1.5e4}{\metre\per\second}$;
   em $B$ o projétil está muito afastado da Terra ($r \to \infty$) e sua velocidade é $v_B$, que queremos descobrir.
   Mas como a única força presente nesse problema é a gravitacional, que é conservativa, a energia mecânica em $A$ e em $B$ deve ser a mesma.
   Ou seja,
@@ -265,8 +335,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \myrightarrow v_B^2 = v_A^2 - 2\frac{GM}{R} = v_A^2 - 2gR \myrightarrow v_B = \SI{10}{\kilo\metre\per\second},
   \end{gather*}
   onde utilizamos $g = GM/R^2 = \SI{9.81}{m/s^2}$, a aceleração da gravidade na superfície da Terra, para simplificar.
-
-  \exercicio
+  \end{exercicio}
+  
+  \begin{exercicio}
+  
   \begin{compactenum}[(a)]
   \item A intensidade da força necessária para levantar a caminhonete é igual à força-peso dela, que é dada pela lei da gravitação universal de Newton:
   \begin{equation*}
@@ -285,8 +357,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   Portanto, nem mesmo o mais rápido corredor é capaz de correr rapidamente o suficiente para escapar da atração gravitacional de Eros.
 
   \end{compactenum}
+  \end{exercicio}
   
-  \exercicio 
+  \begin{exercicio}
+   
   Cada partícula produz um campo gravitacional, $\vec g_1$ e $\vec g_2$, cuja intensidade é:
   \begin{equation*}
   g_1 = g_2 = \frac{GM}{r^2},
@@ -321,8 +395,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \vec g = \frac{\vec F}{m} = -\frac{2GMx}{\left(x^2 + a^2\right)^{3/2}}\hat i,
   \end{equation*}
   que é o resultado desejado.  
-
-  \exercicio
+  \end{exercicio}
+  
+  \begin{exercicio}
+  
   \begin{compactenum}[(a)]
   \item Considere que $A$ seja a posição inicial e $B$, a final.
   Ao longo do deslocamento entre $A$ e $B$, há duas forças agindo sobre $m_3$: a força gravitacional $F_g(x)$ resultante da interação com $m_1$ e $m_2$ e a força externa $F_e$.
@@ -387,9 +463,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   De fato, $W_{A\to B}^{g} = U_g(A) - U_g(B)$.
   Como consequência da análise no item anterior, também $W_{A\to B}^{e}$ será independente do percurso.
   \end{compactenum}
+  \end{exercicio}
 
-
-  \exercicio Suponha que a órbita em questão tenha raio $a$.
+  \begin{exercicio}
+   Suponha que a órbita em questão tenha raio $a$.
   Neste caso, a energia potencial gravitacional entre o objeto em órbita, de massa $m$, e o objeto no centro da órbita, de massa $M$, é constante: $U_g = -GMm/a$.  
   Nessa órbita circular, a velocidade orbital $v$ do objeto não muda (isso decorre da conservação do momento angular) e a força centrípeta necessária para sustentar esse movimento é dada pela força gravitacional:
   \begin{gather*}
@@ -398,23 +475,28 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \end{gather*}
   
   Mas a energia mecânica é $E = U_g + K = U_g - U_g/2 = U_g/2$, como queríamos demonstrar.
-
- 
-  \exercicio Pela terceira lei de Kepler,
+  \end{exercicio}
+  
+  \begin{exercicio}
+   Pela terceira lei de Kepler,
   \begin{equation*}
   \frac{T_{\jupiter}^2}{a_{\jupiter}^3} = \frac{T_{\earth}^2}{a_{\earth}^3} \myrightarrow T_{\jupiter} = T_{\earth} \left(\frac{a_{\jupiter}}{a_{\earth}}\right)^{3/2} = 1 \cdot \left(\frac{5,2}{1}\right)^{3/2} \approx \SI{11.9}{anos}.
   \end{equation*}
   
   Na expressão acima, $T$ representa o período, $a$ é o semi-eixo maior e os símbolos $\jupiter$ e $\earth$ representam Júpiter e a Terra, respectivamente.
-
-  \exercicio Pela terceira lei de Kepler,
+  \end{exercicio}
+  
+  \begin{exercicio}
+   Pela terceira lei de Kepler,
   \begin{equation*}
   \frac{T_{\neptune}^2}{a_{\neptune}^3} = \frac{T_{\earth}^2}{a_{\earth}^3} \myrightarrow a_{\neptune} = a_{\earth} \left(\frac{T_{\neptune}}{T_{\earth}}\right)^{2/3} = 1 \cdot \left(\frac{164,8}{1}\right)^{2/3} \approx \SI{30.1}{UA}.
   \end{equation*}
   
   Na expressão acima, $T$ representa o período, $a$ é o semi-eixo maior e os símbolos $\neptune$ e $\earth$ representam Netuno e a Terra, respectivamente.
-    
-  \exercicio
+  \end{exercicio}
+  
+  \begin{exercicio}
+  
   \begin{compactenum}[(a)]
   \item O período e o semi-eixo maior dos planetas do Sistema Solar são:
   
@@ -475,9 +557,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   Newton, partindo dos trabalhos de Kepler, compreendeu que esse fator depende exclusivamente da massa do Sol, e deste modo é possível estender a terceira lei de Kepler para qualquer sistema solar ou planetário, como você verá no exercício \ref{ex:Io_cia}.
   
   \end{compactenum}
+  \end{exercicio}
   
-  
-  \exercicio Segundo a versão de Newton da terceira lei de Kepler, $T^2 = \frac{4\pi^2}{GM_{\earth}}a^3$, onde $T$ é o período da órbita da estação espacial, $M_{\earth}$ é a massa da Terra e $a$ é o semi-eixo maior da órbita da estação espacial.
+  \begin{exercicio}
+   Segundo a versão de Newton da terceira lei de Kepler, $T^2 = \frac{4\pi^2}{GM_{\earth}}a^3$, onde $T$ é o período da órbita da estação espacial, $M_{\earth}$ é a massa da Terra e $a$ é o semi-eixo maior da órbita da estação espacial.
   Mas $a = R_{\earth} + h$, onde $h$ é a altura da órbita (medida a partir da superfície da Terra e dada no enunciado do exercício).
   Então,
   \begin{equation*}
@@ -488,8 +571,10 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \begin{equation*}
   T = \frac{2\pi}{\sqrt{g}R_{\earth}}\left(R_{\earth}+h\right)^{3/2} = \SI{5529}{s} = \SI{92.1}{min}.
   \end{equation*}
-
-  \exercicio\label{ex:Io_cia} Para o sistema planetário de Júpiter, vale $T^2 = 4\pi^2 a^3/\left(GM_{\jupiter}\right)$, onde $T$ é o período orbital de qualquer satélite (natural ou artificial) e $a$, seu semi-eixo maior.
+  \end{exercicio}
+  
+  \begin{exercicio*}
+  \label{ex:Io_cia} Para o sistema planetário de Júpiter, vale $T^2 = 4\pi^2 a^3/\left(GM_{\jupiter}\right)$, onde $T$ é o período orbital de qualquer satélite (natural ou artificial) e $a$, seu semi-eixo maior.
   \begin{equation*}
   C = \frac{4\pi^2}{GM} = \frac{4\pi^2}{6,67\times10^{-11}\cdot 1,9\times10^{27}} = 3,11\times10^{-16}.
   \end{equation*}
@@ -521,6 +606,7 @@ Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, m
   \end{center}
   
   Note que, para melhorar a apresentação do gráfico, o período foi expresso em dias terrestres e o semi-eixo maior, em \SI{1e9}{\metre}.
+  \end{exercicio*}
 \end{resolucoes}
 
 \end{document}

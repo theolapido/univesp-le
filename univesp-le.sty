@@ -27,6 +27,7 @@
 \newif\if@univesp@atanswer
 \newif\if@univesp@atsolution
 \newif\if@univesp@atbluepages
+\newif\if@tostudent
 
 \global\@univesp@showanswerfalse
 \global\@univesp@showsolutionfalse
@@ -35,6 +36,7 @@
 \global\@univesp@atanswerfalse
 \global\@univesp@atsolutionfalse
 \global\@univesp@atbluepagesfalse
+\global\@tostudentfalse
 
 % Contadores
 \newcounter{exercicio}
@@ -56,25 +58,29 @@
 \def\@univesp@exerciselabel{Exercício}
 \def\@univesp@answerstitle{Gabarito}
 \def\@univesp@solutiontitle{Gabarito do mediador}
-
+\def\@univesp@answerunavailable{Resposta não disponível: este exercício faz parte do portfólio.}
+\def\@univesp@portfolio{(portfólio)}
 
 
 % Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{mediador}{%
   \global\@univesp@showanswerfalse
   \global\@univesp@showsolutiontrue
+  \global\@tostudentfalse
 }
 
 % Esta opção faz com que apenas as respostas sejam exibidas, além dos enunciados.
 \DeclareOption{aluno}{%
   \global\@univesp@showanswertrue
   \global\@univesp@showsolutionfalse
+  \global\@tostudenttrue
 }
 
 % Esta opção (padrão) faz com que as respostas e as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{professor}{%
   \global\@univesp@showanswertrue
   \global\@univesp@showsolutiontrue
+  \global\@tostudentfalse
 }
 
 \ExecuteOptions{professor}
@@ -129,23 +135,25 @@
     \fi
   }
 }
-
-% Use o comando \exercicio para iniciar um novo exercício.
-\providecommand\exercicio{%
+% Identifica qual contador usar: dos enunciados (\theexercicio), das respostas (\theanswer) ou das resoluções (\thesolution).
+\def\@@stepexercisecounter{
   \if@univesp@atquery
-    \refstepcounter{exercicio}% TODO: um contador para os enunciados, outro para as respostas e outro para as resoluções
+    \refstepcounter{exercicio}%
     \gdef\@univesp@exercisecount{\theexercicio}
   \else
     \if@univesp@atanswer
-      \refstepcounter{answer}
+      \refstepcounter{answer}%
       \gdef\@univesp@exercisecount{\theanswer}
     \else
-      \refstepcounter{solution}
+      \refstepcounter{solution}%
       \gdef\@univesp@exercisecount{\thesolution}
     \fi
   \fi
+}
+% Use o ambiente exercicio para os exercícios ordinários.
+\NewEnviron{exercicio}{%
+  \@@stepexercisecounter
   \par\vspace{\@univesp@exerciseskip}
-  \addpenalty{-300}
   \noindent
   \begingroup
     \mdseries\upshape\fontsize{13pt}{14.9pt}\selectfont
@@ -153,13 +161,42 @@
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
   \endgroup
   \par
-  \addpenalty{+300}
+  \addpenalty{+300}%
+  \BODY
+}{%
+  \par
+  \addpenalty{-300}%
 }
-
+% Use o ambiente exercicio* para os exercícios do portfólio.
+\NewEnviron{exercicio*}{%
+  \@@stepexercisecounter
+  \par\vspace{\@univesp@exerciseskip}
+  \noindent
+  \begingroup
+    \mdseries\upshape\fontsize{13pt}{14.9pt}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}
+    \@univesp@portfolio
+  \endgroup
+  \par
+  \addpenalty{-1000}%
+  \if@univesp@atanswer
+    \if@tostudent
+      \@univesp@answerunavailable
+    \else
+      \BODY
+    \fi
+  \else
+    \BODY
+  \fi  
+}{%
+  \par
+  \addpenalty{+300}%
+}
 % Coloque as respostas dentro do ambiente respostas.
 \NewEnviron{respostas}{
   \if@univesp@showanswer
-    \newpage
+    \reshape
     \global\@univesp@atqueryfalse%
     \global\@univesp@atanswertrue%
     \global\@univesp@atsolutionfalse%
@@ -172,14 +209,13 @@
     \endgroup
     \par
     \setcounter{exercicio}{0}% 
-    \BODY
+      \BODY
   \fi
 }{}
-
 % Coloque as resoluções dentro do ambiente resolucoes
 \NewEnviron{resolucoes}{
   \if@univesp@showsolution
-    \newpage
+    \reshape
     \global\@univesp@atqueryfalse%
     \global\@univesp@atanswerfalse%
     \global\@univesp@atsolutiontrue%
@@ -238,24 +274,10 @@
   \par
 }
 
-% TODO
-% Não consegui fazer com que o LaTeX alterasse as margens automaticamente.
-% Então, por enquanto isso deve ser feito manualmente, inserindo o comando
-% \reshape na segunda página do documento.
+% O LaTeX NÃO PROVÊ UMA MANEIRA DE ``AGENDAR'' A ALTERAÇÃO DA LARGURA/ALTURA DO TEXTO _DA PRÓXIMA PÁGINA_.
+% ENTÃO, PARA USAR A GEOMETRIA DEVIDA A PARTIR DA SEGUNDA PÁGINA, O USUÁRIO DEVE, MANUALMENTE,
+% COLOCAR O COMANDO \reshape NO LOCAL ONDE A QUEBRA DA PRIMEIRA PÁGINA OCORRE.
 \providecommand\reshape{\newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}}
-%
-% Para resolver o problema acima, o mais próximo que consegui foi o código abaixo, inspirado em:
-% http://tex.stackexchange.com/questions/212938/change-page-layout-at-begin-of-each-page
-% Ainda assim, não funciona corretamente: parece que o pacote geometry está se perdendo ao reconfigurar a página,
-% pois as margens mudam, mas não como deveriam.
-%
-%\let\@@outputpage\@outputpage
-%\def\@outputpage{\expandafter\@thisgeometry\@@outputpage}
-%\gdef\@thisgeometry{%
-%  \ifthenelse{\thepage>1}{%
-%    \newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}%
-%  }{}
-%}
 
 % Família-padrão da fonte: sem serifa
 \renewcommand*\familydefault{\sfdefault}

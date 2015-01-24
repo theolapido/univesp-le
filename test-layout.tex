@@ -10,7 +10,7 @@
 % professor   Exibe as respostas e as resoluções (PADRÃO)
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
-\usepackage[aluno]{univesp-le}
+\usepackage[professor]{univesp-le}
 
 % REMOVER. Usado apenas para gerar texto lipsum
 \usepackage{lipsum}
@@ -25,38 +25,135 @@
 % Imprime o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
 \maketitle
  
-% Cada \exercicio inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
-\exercicio \lipsum[1-2]
-\exercicio \lipsum[3]
-\exercicio Teste teste
-\exercicio Teste teste
-\exercicio Teste teste
-\exercicio \lipsum[4]
-\exercicio \lipsum[5-8]
-\exercicio \lipsum[10]
+% Cada ambiente exercicio inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
+\begin{exercicio*}
+  Este é o enunciado de um exercício do portfólio, pois foi criado com o ambiente \texttt{exercicio*} (com asterisco).
+\end{exercicio*}
+
+\begin{exercicio}
+  \label{ex:qquer}
+  Enunciado de um exercício ordinário, criado com o ambiente \texttt{exercicio} (sem asterisco).
+\end{exercicio}
+
+\begin{exercicio}
+  Este exercício faz referência ao exercício~\ref{ex:qquer}.
+\end{exercicio}
+
+\begin{exercicio}
+ \lipsum[1-2]
+ \begingroup
+  \color{red}Neste ponto o usuário deve, \emph{manualmente}, inserir o comando \texttt{$\backslash$reshape} para alterar a largura e altura do texto a partir da próxima página.
+  Esse comando impõe uma quebra de página neste ponto.
+ \endgroup
+ \reshape
+ \lipsum[4-16]
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+  O \LaTeX\ tentará \emph{não} quebrar a página entre ``EXERCÍCIO X'' e o texto que o sucede, mas isso nem sempre é possível.
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+\end{exercicio}
+
+\begin{exercicio}
+  Exercício curto.
+\end{exercicio}
 
 % Use o ambiente respostas para as respostas.
 \begin{respostas}
-  \exercicio \lipsum[1-2]
-  \exercicio \lipsum[3]
-  \exercicio \lipsum[4]
-  \exercicio \lipsum[5-8]
-  \exercicio Teste teste
-  \exercicio Teste teste
-  \exercicio Teste teste
-  \exercicio \lipsum[10]
+  \begin{exercicio*}
+    Resposta de um exercício do portfólio:
+    \emph{não} aparece para o aluno;
+    mas aparece para o mediador e para o professor.
+  \end{exercicio*}
+  
+  \begin{exercicio}
+    Resposta de um exercício ordinário.
+  \end{exercicio}
+  
+  \begin{exercicio}
+    \lipsum[1-18]
+  \end{exercicio}
+  
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
 \end{respostas}
 
 % Use o ambiente resolucoes para as resoluções.
 \begin{resolucoes}
-  \exercicio \lipsum[1-2]
-  \exercicio \lipsum[3]
-  \exercicio \lipsum[4]
-  \exercicio \lipsum[5-8]
-  \exercicio \lipsum[9]
-  \exercicio Teste teste
-  \exercicio Teste teste
-  \exercicio Teste teste
+  \begin{exercicio*}
+    Resolução de um exercício do portfólio.
+    No caso das resoluções, não há diferença entre exercícios ordinários e do portfólio.
+  \end{exercicio*}
+  
+  \begin{exercicio}
+    Resolução de um exercício ordinário.
+  \end{exercicio}
+  
+  \begin{exercicio}
+    \lipsum[1-20]
+  \end{exercicio}
+  
+ \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
+  \begin{exercicio}
+    Exercício curto.
+  \end{exercicio}
+
 \end{resolucoes}
 
 \end{document}

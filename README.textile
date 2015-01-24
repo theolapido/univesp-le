@@ -19,17 +19,30 @@ Veja um exemplo abaixo:
 \begin{document}
 
   \maketitle
-  
-  \exercicio\label{ex:qquer} Primeiro exercício.
-  \exercicio Referência ao exercício \label{ex:qquer}.
-  
+
+  \begin{exercicio*}\label{ex:qquer}
+    Este é um exercício do portfólio.
+  \end{exercicio*}
+
+  \begin{exercicio}
+    Este é um exercício ordinário fazendo referência ao exercício \label{ex:qquer}.
+  \end{exercicio}
+
+  % Use o ambiente "respostas" para agrupar as respostas.
   \begin{respostas}
-    \exercicio Resposta do primeiro exercício.
+    \begin{exercicio*}
+      Resposta do exercício do portfólio: não aparece para o aluno (opção "aluno" do pacote),
+      mas aparece para o mediador ("mediador") e para o professor ("professor", opção padrão).
+    \end{exercicio*}
     ...
   \end{respostas}
   
+  % Use o ambiente "resolucoes" para agrupar as resoluções.
+  % Elas aparecerão apenas para os moderadores (opção "moderador") e para o professor ("professor").
   \begin{resolucoes}
-    \exercicio Resolução do primeiro exercício.
+    \begin{exercicio}
+      Resolução de um exercício.
+    \end{exercicio}
     ...
   \end{resolucoes}
 
