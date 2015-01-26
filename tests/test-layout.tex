@@ -11,7 +11,7 @@
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
 \usepackage[professor]{univesp-le}
-\usepackage{paralist}
+%\usepackage{paralist}
 
 % REMOVER. Usado apenas para gerar texto lipsum
 \usepackage{lipsum}
@@ -38,14 +38,23 @@
 \end{exercicio}
 
 \begin{exercicio}
-  \begin{compactenum}[\bfseries\color{foregroundblue} (a)]
+  \begin{enumerate}
   \item Enunciado de um exercício ordinário, criado com o ambiente \texttt{exercicio} (sem asterisco).
   \footnote{Outra nota de rodapé.}
-  \end{compactenum}
+  \item Item de exercício.
+  \item Outro item de exercício.
+  \end{enumerate}
 \end{exercicio}
 
 \begin{exercicio}
   Este exercício faz referência ao exercício~\ref{ex:qquer}.
+\end{exercicio}
+
+\begin{exercicio}
+  \begin{enumerate}
+  \item Item de exercício.
+  \item Outro item de exercício.
+  \end{enumerate}
 \end{exercicio}
 
 \begin{exercicio}

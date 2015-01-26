@@ -14,10 +14,11 @@
 \RequirePackage{everypage}
 %\RequirePackage[left=52mm, top=52mm, right=33mm, bottom=33mm]{geometry} % Configuração da página 1
 %\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=22mm]{geometry} % Configuração das demais páginas
-\RequirePackage[left=52mm, top=22mm, right=32mm, bottom=33mm]{geometry}
+\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=33mm]{geometry}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{environ}
+\RequirePackage{paralist}
 
 % Flags
 \newif\if@univesp@showanswer
@@ -50,7 +51,7 @@
 
 % Comprimentos
 \newlength{\@univesp@exerciseskip}
-\setlength{\@univesp@exerciseskip}{1.5\baselineskip plus 2pt minus 2pt}
+\setlength{\@univesp@exerciseskip}{0.5\baselineskip plus 0.3pt minus 1pt}
 
 % Rótulos padronizados
 \def\@univesp@subtitle{Lista de exercícios das aulas}
@@ -282,7 +283,11 @@
 \AtBeginDocument{%
   \sffamily\mdseries\upshape\fontsize{12.5pt}{14pt}\selectfont  
   \setlength\parindent{0pt}
-  \setlength\parskip{0.5em}
+  \setlength\parskip{0.5em plus 0.25em minus 0.25em}
 }
+
+% Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
+\renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
+\renewenvironment{enumerate}{\begin{compactenum}[\bfseries\color{foregroundblue}(a)]}{\end{compactenum}}
 
 \endinput
