@@ -11,12 +11,13 @@
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
 \usepackage[professor]{univesp-le}
+\usepackage{paralist}
 
 % REMOVER. Usado apenas para gerar texto lipsum
 \usepackage{lipsum}
 
 % Define o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
-\disciplina{Física II para Engenharia} % = \title
+\disciplina{Física II} % = \title
 \autor{Ivan Ramos Pagnossin}           % = \author
 \aulas{1--2}
 
@@ -24,7 +25,7 @@
 
 % Imprime o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
 \maketitle
- 
+
 % Cada ambiente exercicio inicia um novo exercício, independentemente de tratar-se do enunciado, resposta ou resolução.
 \begin{exercicio*}
   Este é o enunciado de um exercício do portfólio, pois foi criado com o ambiente \texttt{exercicio*} (com asterisco).
@@ -33,6 +34,14 @@
 \begin{exercicio}
   \label{ex:qquer}
   Enunciado de um exercício ordinário, criado com o ambiente \texttt{exercicio} (sem asterisco).
+  \textbf{\MakeUppercase{Negrito}}.\footnote{Uma nota de rodapé.}
+\end{exercicio}
+
+\begin{exercicio}
+  \begin{compactenum}[\bfseries\color{foregroundblue} (a)]
+  \item Enunciado de um exercício ordinário, criado com o ambiente \texttt{exercicio} (sem asterisco).
+  \footnote{Outra nota de rodapé.}
+  \end{compactenum}
 \end{exercicio}
 
 \begin{exercicio}
@@ -40,13 +49,7 @@
 \end{exercicio}
 
 \begin{exercicio}
- \lipsum[1-2]
- \begingroup
-  \color{red}Neste ponto o usuário deve, \emph{manualmente}, inserir o comando \texttt{$\backslash$reshape} para alterar a largura e altura do texto a partir da próxima página.
-  Esse comando impõe uma quebra de página neste ponto.
- \endgroup
- \reshape
- \lipsum[4-16]
+  \lipsum[1-20]
 \end{exercicio}
 
 \begin{exercicio}

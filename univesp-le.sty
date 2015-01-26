@@ -14,7 +14,7 @@
 \RequirePackage{everypage}
 %\RequirePackage[left=52mm, top=52mm, right=33mm, bottom=33mm]{geometry} % Configuração da página 1
 %\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=22mm]{geometry} % Configuração das demais páginas
-\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=33mm]{geometry}
+\RequirePackage[left=52mm, top=22mm, right=32mm, bottom=33mm]{geometry}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{environ}
@@ -113,8 +113,7 @@
       \node (a) at ($(current page.south west) + (10mm,10mm)$) {};
       \node (b) at ($(current page.north east) - (10mm,10mm)$) {};
       \filldraw[fill=backgroundblue, even odd rule, draw opacity=0] (current page.south west) rectangle (current page.north east) (a) rectangle (b);
-      \node at ($(current page.north east) - (34mm,20mm)$) {\includegraphics[width=30mm]{univesp}};
-      \node [align=left] at ($(current page.south west)+(50mm,24mm)$) [anchor=west] {\@univesp@foot};
+      \node at ($(current page.north east) - (34mm,20mm)$) {\includegraphics[width=30mm]{univesp-logo}};
     \end{tikzpicture}
   }{%
     \if@univesp@atbluepages
@@ -156,7 +155,7 @@
   \par\vspace{\@univesp@exerciseskip}
   \noindent
   \begingroup
-    \mdseries\upshape\fontsize{13pt}{14.9pt}\selectfont
+    \bfseries\upshape\fontsize{11pt}{13pt}\selectfont
     \color{foregroundblue}%
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
   \endgroup
@@ -173,7 +172,7 @@
   \par\vspace{\@univesp@exerciseskip}
   \noindent
   \begingroup
-    \mdseries\upshape\fontsize{13pt}{14.9pt}\selectfont
+    \bfseries\upshape\fontsize{11pt}{13pt}\selectfont
     \color{foregroundblue}%
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}
     \@univesp@portfolio
@@ -196,7 +195,7 @@
 % Coloque as respostas dentro do ambiente respostas.
 \NewEnviron{respostas}{
   \if@univesp@showanswer
-    \reshape
+    \newpage
     \global\@univesp@atqueryfalse%
     \global\@univesp@atanswertrue%
     \global\@univesp@atsolutionfalse%
@@ -215,7 +214,7 @@
 % Coloque as resoluções dentro do ambiente resolucoes
 \NewEnviron{resolucoes}{
   \if@univesp@showsolution
-    \reshape
+    \newpage
     \global\@univesp@atqueryfalse%
     \global\@univesp@atanswerfalse%
     \global\@univesp@atsolutiontrue%
@@ -274,17 +273,16 @@
   \par
 }
 
-% O LaTeX NÃO PROVÊ UMA MANEIRA DE ``AGENDAR'' A ALTERAÇÃO DA LARGURA/ALTURA DO TEXTO _DA PRÓXIMA PÁGINA_.
-% ENTÃO, PARA USAR A GEOMETRIA DEVIDA A PARTIR DA SEGUNDA PÁGINA, O USUÁRIO DEVE, MANUALMENTE,
-% COLOCAR O COMANDO \reshape NO LOCAL ONDE A QUEBRA DA PRIMEIRA PÁGINA OCORRE.
-\providecommand\reshape{\newgeometry{left=52mm, top=22mm, right=22mm, bottom=22mm}}
+\renewcommand\footnoterule{{\color{backgroundblue}\rule[2pt]{0.5\textwidth}{0.1pt}}}
 
 % Família-padrão da fonte: sem serifa
 \renewcommand*\familydefault{\sfdefault}
 
 % Define a fonte padrão do documento.
 \AtBeginDocument{%
-  \sffamily\mdseries\upshape\fontsize{11.5pt}{13.2pt}\selectfont
+  \sffamily\mdseries\upshape\fontsize{12.5pt}{14pt}\selectfont  
+  \setlength\parindent{0pt}
+  \setlength\parskip{0.5em}
 }
 
 \endinput
