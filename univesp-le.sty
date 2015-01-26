@@ -29,6 +29,7 @@
 \newif\if@univesp@atsolution
 \newif\if@univesp@atbluepages
 \newif\if@tostudent
+\newif\if@atinlineenum
 
 \global\@univesp@showanswerfalse
 \global\@univesp@showsolutionfalse
@@ -38,11 +39,13 @@
 \global\@univesp@atsolutionfalse
 \global\@univesp@atbluepagesfalse
 \global\@tostudentfalse
+\global\@atinlineenumfalse
 
 % Contadores
 \newcounter{exercicio}
 \newcounter{answer}
 \newcounter{solution}
+\newcounter{inlineenumcounter}
 
 % Paleta de cores
 \definecolor{foregroundblue}{rgb}{0.137,0.392,0.706}
@@ -61,7 +64,6 @@
 \def\@univesp@solutiontitle{Gabarito do mediador}
 \def\@univesp@answerunavailable{Resposta não disponível: este exercício faz parte do portfólio.}
 \def\@univesp@portfolio{(portfólio)}
-
 
 % Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{mediador}{%
@@ -289,5 +291,24 @@
 % Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
 \renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
 \renewenvironment{enumerate}{\begin{compactenum}[\bfseries\color{foregroundblue}(a)]}{\end{compactenum}}
+
+% Use o ambiente inlineenum para criar uma lista de itens de exercício sem iniciar um novo parágrafo para cada item.
+\newenvironment{inlineenum}{%
+  \@atinlineenumtrue
+  \setcounter{inlineenumcounter}{0}  
+}{%
+  \@atinlineenumfalse
+}
+
+% Use o comando \inlineitem para iniciar um novo item DENTRO de um ambiente inlineenum
+\providecommand\inlineitem{%
+  \if@atinlineenum
+    \refstepcounter{inlineenumcounter}%
+    \begingroup
+      \bfseries\color{foregroundblue}(\alph{inlineenumcounter})
+    \endgroup
+  \fi
+}
+
 
 \endinput
