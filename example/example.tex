@@ -2,18 +2,16 @@
 \usepackage[utf8]{inputenc}
 
 % Fonte sem serifa com suporte a expressões matemáticas
-%\usepackage{cmbright}
+\usepackage[default,osfigures]{opensans}
+\usepackage[bitstream-charter]{mathdesign}
 \usepackage[T1]{fontenc}
-\usepackage[sfdefault]{AlegreyaSans}
-\usepackage{sfmath}
-\usepackage{sansmathaccent}
 
 % Pacote que define o layout da lista de exercícios
 % Opções:
 % professor   Exibe as respostas e as resoluções (PADRÃO)
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
-\usepackage[professor]{univesp-le}
+\usepackage[aluno]{univesp-le}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -33,7 +31,7 @@
 \autor{Ivan Ramos Pagnossin}           % = \author
 \aulas{1--10}
 
-\hyphenation{Sa-ben-do Ga-ni-me-des trans-la-ção}
+\hyphenation{Sa-ben-do Ga-ni-me-des trans-la-ção mo-ver}
 
 \begin{document}
 
@@ -121,17 +119,17 @@ Sabendo que o semi-eixo maior da órbita da Terra é \SI{1}{UA}, qual é o perí
 e o outro para Júpiter, Saturno, Urano, Netuno e Plutão.}
 
 \item No gráfico do item anterior, os pontos alinham-se. Qual é o valor do coeficiente angular, no Sistema Internacional de Unidades (SI)?
-Compare-o com a constante $4\pi^2/(GM_{\astrosun})$, onde $G = \SI{6.67e-11}{N.m^2/kg^2}$ é a constante universal da gravidade e $M_{\astrosun} = \SI{1.99e30}{kg}$ é a massa do Sol.
+Compare-o com a constante $4\pi^2/(GM_{\astrosun})$. $G = \SI{6.67e-11}{N.m^2/kg^2}$ é a constante universal da gravidade e $M_{\astrosun} = \SI{1.99e30}{kg}$ é a massa do Sol.
 \end{enumerate}
 \end{exercicio}
 
 \begin{exercicio}
- A Estação Espacial Internacional move-se aproximadamente segundo uma órbita circular em torno da Terra.
+ A Estação Espacial Internacional move-se segundo uma órbita aproximadamente circular em torno da Terra.
 Considerando que ela esteja a \SI{385}{km} acima da superfície da Terra, qual é o período da órbita?
 \end{exercicio}
 
 \begin{exercicio*}
- Júpiter é o maior planeta do Sistema Solar. Sua massa é de $M_{\jupiter}=\SI{1.9e27}{kg}$ (318 vezes mais massivo que a Terra) e possui mais de cinquenta luas (satélites naturais) conhecidas. As quatro maiores delas, visíveis da Terra com um pequeno telescópio e descobertas por Galileu Galilei no século XVII, são: Io, Europa, Ganimedes e Calisto. Você, ao reproduzir a observação de Galileu, mediu os seguintes períodos de revolução em torno de Júpiter: \SI{42.5}{h} para Io, \SI{85.2}{h} para Europa, \SI{171.6}{h} para Ganimedes e \SI{400.6}{h} para Calisto.  
+ Júpiter é o maior planeta do Sistema Solar. Sua massa é de aproximadamente $M_{\jupiter}=\SI{1.9e27}{kg}$ (318 vezes mais massivo que a Terra) e possui mais de cinquenta luas (satélites naturais) conhecidas. As quatro maiores delas, visíveis da Terra com um pequeno telescópio e descobertas por Galileu Galilei no século XVII, são: Io, Europa, Ganimedes e Calisto. Você, ao reproduzir a observação de Galileu, mediu os seguintes períodos de revolução em torno de Júpiter: \SI{42.5}{h} para Io, \SI{85.2}{h} para Europa, \SI{171.6}{h} para Ganimedes e \SI{400.6}{h} para Calisto.  
 Com esses dados \emph{apenas} e conhecendo a constante universal da gravidade, monte o gráfico $T^2 \times a^3$ desse sistema planetário.
 \end{exercicio*}
 

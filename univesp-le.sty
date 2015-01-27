@@ -19,6 +19,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{environ}
 \RequirePackage{paralist}
+\RequirePackage{calc}
 
 % Flags
 \newif\if@univesp@showanswer
@@ -30,6 +31,7 @@
 \newif\if@univesp@atbluepages
 \newif\if@tostudent
 \newif\if@atinlineenum
+\newif\if@showportfolio
 
 \global\@univesp@showanswerfalse
 \global\@univesp@showsolutionfalse
@@ -40,6 +42,7 @@
 \global\@univesp@atbluepagesfalse
 \global\@tostudentfalse
 \global\@atinlineenumfalse
+\global\@showportfoliofalse
 
 % Contadores
 \newcounter{exercicio}
@@ -64,6 +67,10 @@
 \def\@univesp@solutiontitle{Gabarito do mediador}
 \def\@univesp@answerunavailable{Resposta não disponível: este exercício faz parte do portfólio.}
 \def\@univesp@portfolio{(portfólio)}
+
+\DeclareOption{portfolio}{%
+  \global\@showportfoliotrue
+}
 
 % Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{mediador}{%
@@ -100,11 +107,11 @@
   \color{foregroundblue}%
   \rule[0.5em]{\textwidth}{0.1pt}\\%
   \color{foregroundblue}%
-  \mdseries\upshape\fontsize{7.5}{8.6}\selectfont
+  \mdseries\upshape\fontsize{7.5}{1.47em}\selectfont%11
   \@univesp@disciplina
   \textbf{~/~\@univesp@lfoot~\@univesp@aulas}%
   \hfill
-  \fontsize{9}{10.3}\selectfont
+  \fontsize{9}{1.47em}\selectfont%13
   \thepage
 }
 
@@ -158,13 +165,13 @@
   \par\vspace{\@univesp@exerciseskip}
   \noindent
   \begingroup
-    \bfseries\upshape\fontsize{11pt}{13pt}\selectfont
+    \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
     \color{foregroundblue}%
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
   \endgroup
   \par
   \addpenalty{+300}%
-  \BODY
+  \noindent\BODY
 }{%
   \par
   \addpenalty{-300}%
@@ -175,21 +182,28 @@
   \par\vspace{\@univesp@exerciseskip}
   \noindent
   \begingroup
-    \bfseries\upshape\fontsize{11pt}{13pt}\selectfont
+    \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
     \color{foregroundblue}%
-    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}
-    \@univesp@portfolio
+    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
+    \if@showportfolio
+      ~\@univesp@portfolio
+    \fi
   \endgroup
   \par
-  \addpenalty{-1000}%
+  \addpenalty{-1000}%  
   \if@univesp@atanswer
-    \if@tostudent
-      \@univesp@answerunavailable
+    \if@showportfolio      
+      \if@tostudent
+	\noindent
+	\@univesp@answerunavailable
+      \else
+	\noindent\BODY
+      \fi
     \else
-      \BODY
-    \fi
+      \noindent\BODY
+    \fi    
   \else
-    \BODY
+    \noindent\BODY
   \fi  
 }{%
   \par
@@ -205,7 +219,7 @@
     \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
-      \bfseries\upshape\fontsize{20pt}{23pt}\selectfont
+      \bfseries\upshape\fontsize{20pt}{1.47em}\selectfont%29
       \color{foregroundblue}%
       \MakeUppercase{\@univesp@answerstitle}%
     \endgroup
@@ -224,7 +238,7 @@
     \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
-      \bfseries\upshape\fontsize{20pt}{23pt}\selectfont
+      \bfseries\upshape\fontsize{20pt}{1.47em}\selectfont%29
       \color{foregroundblue}%
       \MakeUppercase{\@univesp@solutiontitle}%
     \endgroup
@@ -261,13 +275,13 @@
   \par\vspace*{30mm}%
   \noindent
   \begingroup
-    \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{23pt}\selectfont
+    \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{1.47em}\selectfont%29
     \MakeUppercase{\@univesp@disciplina}%
     \if@univesp@aulasdefined
       \par
       \vspace{0.5\@univesp@exerciseskip}
       \noindent
-      \fontsize{13pt}{14.9pt}\selectfont
+      \fontsize{13pt}{1.47em}\selectfont%19
       \MakeUppercase{\@univesp@subtitle~\@univesp@aulas}%
     \fi
   \endgroup
@@ -283,9 +297,9 @@
 
 % Define a fonte padrão do documento.
 \AtBeginDocument{%
-  \sffamily\mdseries\upshape\fontsize{12.5pt}{14pt}\selectfont  
-  \setlength\parindent{0pt}
-  \setlength\parskip{0.5em plus 0.25em minus 0.25em}
+  \sffamily\mdseries\upshape\fontsize{11.5pt}{1.47em}\selectfont  %17
+  %\setlength\parindent{0pt}
+  %\setlength\parskip{0.5em plus 0.25em minus 0.25em}
 }
 
 % Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
