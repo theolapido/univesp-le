@@ -67,23 +67,23 @@
 
 % Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{mediador}{%
-  \global\@univesp@showanswerfalse
-  \global\@univesp@showsolutiontrue
-  \global\@tostudentfalse
+  \global\@univesp@showanswerfalse%
+  \global\@univesp@showsolutiontrue%
+  \global\@tostudentfalse%
 }
 
 % Esta opção faz com que apenas as respostas sejam exibidas, além dos enunciados.
 \DeclareOption{aluno}{%
-  \global\@univesp@showanswertrue
-  \global\@univesp@showsolutionfalse
-  \global\@tostudenttrue
+  \global\@univesp@showanswertrue%
+  \global\@univesp@showsolutionfalse%
+  \global\@tostudenttrue%
 }
 
 % Esta opção (padrão) faz com que as respostas e as resoluções sejam exibidas, além dos enunciados.
 \DeclareOption{professor}{%
-  \global\@univesp@showanswertrue
-  \global\@univesp@showsolutiontrue
-  \global\@tostudentfalse
+  \global\@univesp@showanswertrue%
+  \global\@univesp@showsolutiontrue%
+  \global\@tostudentfalse%
 }
 
 \ExecuteOptions{professor}
@@ -309,6 +309,5 @@
     \endgroup
   \fi
 }
-
 
 \endinput
