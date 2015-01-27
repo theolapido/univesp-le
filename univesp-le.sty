@@ -12,14 +12,15 @@
 \ProvidesPackage{univesp-le}[2015/01/22 v0.1 - Lista de exercícios da Univesp]
 \RequirePackage{ifthen}
 \RequirePackage{everypage}
-%\RequirePackage[left=52mm, top=52mm, right=33mm, bottom=33mm]{geometry} % Configuração da página 1
-%\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=22mm]{geometry} % Configuração das demais páginas
 \RequirePackage[left=52mm, top=22mm, right=22mm, bottom=33mm]{geometry}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{environ}
 \RequirePackage{paralist}
 \RequirePackage{calc}
+\RequirePackage[default,osfigures]{opensans}
+\RequirePackage[bitstream-charter]{mathdesign}
+\RequirePackage[T1]{fontenc}
 
 % Flags
 \newif\if@univesp@showanswer
@@ -271,7 +272,8 @@
 }}
 
 % Redefine o comando \maketitle para exibir o nome da disciplina, as aulas às quais os exercícios se referem e o professor autor da lista.
-\renewcommand\maketitle{
+\let\maketitle=\relax
+\newcommand\@univesp@maketitle{
   \par\vspace*{30mm}%
   \noindent
   \begingroup
@@ -295,12 +297,7 @@
 % Família-padrão da fonte: sem serifa
 \renewcommand*\familydefault{\sfdefault}
 
-% Define a fonte padrão do documento.
-\AtBeginDocument{%
-  \sffamily\mdseries\upshape\fontsize{11.5pt}{1.47em}\selectfont  %17
-  %\setlength\parindent{0pt}
-  %\setlength\parskip{0.5em plus 0.25em minus 0.25em}
-}
+
 
 % Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
 \renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
@@ -317,11 +314,17 @@
 % Use o comando \inlineitem para iniciar um novo item DENTRO de um ambiente inlineenum
 \providecommand\inlineitem{%
   \if@atinlineenum
-    \refstepcounter{inlineenumcounter}%
+    \stepcounter{inlineenumcounter}%
     \begingroup
       \bfseries\color{foregroundblue}(\alph{inlineenumcounter})
     \endgroup
   \fi
+}
+
+% Define a fonte padrão do documento.
+\AtBeginDocument{%
+  \sffamily\mdseries\upshape\fontsize{11.5pt}{1.47em}\selectfont  %17
+  \@univesp@maketitle
 }
 
 \endinput

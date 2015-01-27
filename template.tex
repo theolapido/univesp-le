@@ -1,0 +1,152 @@
+% -----------------------------------------------------------------------------------------
+% Encoding: UTF-8
+% -----------------------------------------------------------------------------------------
+% Modelo de lista de exercício da Universidade Virtual do Estado de São Paulo (Univesp),
+% usando o pacote univesp-le, e instruções de uso do pacote.
+% Autor:    Ivan Ramos Pagnossin
+% Data:     Janeiro de 2015
+% Idioma:   pt-BR
+% Licença:  Creative Commons BY-SA International 4.0
+%
+% Template of a list of exercise of Universidade Virtual do Estado de São Paulo (Univesp),
+% which uses package univesp-le, and instructions of use.
+% Author:   Ivan Ramos Pagnossin
+% Date:     January 2015
+% Language: pt-BR
+% License:  Creative Commons BY-SA International 4.0
+% -----------------------------------------------------------------------------------------
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+% -----------------------------------------------------------------------------------------
+% O pacote univesp-le encarrega-se de cuidar de quase todos os detalhes de
+% layout das listas de exercícios da Univesp. Ele tem apenas três opções,
+% a saber: aluno, moderador e portfolio, sendo que as duas primeiras são
+% mutuamente excludentes. Veja o que elas fazem:
+% 
+% aluno   	Gera a versão da lista que vai para o aluno:
+%               ela contém os enunciados e as respostas.
+%               Se também a opção _portfolio_ for usada, os exercícios
+%               indicados para o portfólio serão destacados dos
+%               demais e as respostas deles serão ocultas do aluno.
+%
+% moderador	Gera a versão da lista que vai para o moderador:
+%               ela contém os enunciados, as respostas e as resoluções.
+%               Se também a opção _portfolio_ for utilizada, os
+%               exercícios indicados para o portfólio serão destacados
+%               dos demais.
+%
+% portfolio     Acrescenta uma distinção visual entre os exercícios
+%               ordinários e aqueles que foram indicados para o portfólio.
+%               Se também a opção _aluno_ for usada, as respostas dos
+%               exercícios indicados para o portfólio serão ocultas.
+%
+% Além dessas opções, o pacote define uma série de comandos para criar a
+% lista de exercícios apropriadamente:
+%
+% Comandos \disciplina
+%          \autor
+%          \aulas
+%          \inlineitem
+%
+% Ambientes exercicio
+%           exercicio*
+%           respostas
+%           resolucoes
+%           inlineenum
+%
+% Veja abaixo como usá-los.
+% -----------------------------------------------------------------------------------------
+\usepackage{univesp-le}
+
+\disciplina{Nome da disciplina}
+\autor{Nome do professor-autor}
+\aulas{XX--YY} % Aulas às quais essa lista de exercício está associada.
+
+% Usado apenas neste modelo.
+\newcommand\code[1]{\textbf{#1}}
+
+\begin{document}
+
+  % ------------- ENUNCIADOS -------------
+  % O ambiente exercicio é usado para criar o enunciado, a resposta e a resolução de um exercício.
+  \begin{exercicio}
+    Este é o enunciado de um exercício.
+    \begin{enumerate}
+      \item Um item de exercício.
+      \item Outro item de exercício.
+    \end{enumerate}
+  \end{exercicio}
+
+  % Use o ambiente exercicio* (com asterisco) para indicar um exercício que vai para o portfólio do aluno.
+  \begin{exercicio*}\label{ex:qquer}%
+    Este é o enunciado de um exercício do portfólio, pois foi criado com o ambiente \code{exercicio*} (com asterisco).
+    Mas essa distinção só é visível se a opção \code{portfolio} for usada.  
+  \end{exercicio*}
+
+  \begin{exercicio}
+    Este exercício faz uma referência ao exercício \ref{ex:qquer}.
+    Ele também tem itens, mas desta vez eles seguem a linha normalmente:%
+    \begin{inlineenum}
+      \inlineitem Um item de exercício.
+      \inlineitem Outro item de exercício.
+    \end{inlineenum}
+
+  \end{exercicio}
+
+  % ------------- RESPOSTAS -------------
+  % Use o ambiente respostas para agrupar as respostas dos exercícios.
+  % É isso que distingue as respostas dos enunciados.
+  \begin{respostas}
+    
+    O ``gabarito'' contém as \emph{respostas} dos exercícios e sempre é exibido.
+    
+    Se a opção \code{portfolio} for utilizada, os exercícios que foram indicados para o portfólio
+    terão a marca ``(portfólio)'' após a numeração.  
+    Adicionalmente, se \emph{também} a opção \code{aluno} for utilizada,
+    as respostas dos exercícios indicados para o portfólio serão ocultas do aluno.
+    No lugar delas aparecerá o texto padronizado
+    ``Resposta não disponível: este exercício faz parte do portfólio''.
+
+    \begin{exercicio}
+      Aqui vem a resposta do exercício.
+    \end{exercicio}
+    
+    \begin{exercicio*}
+      Esta é a resposta do exercício que vai para o portfólio, pois como o seu enunciado, foi criada com o ambiente \code{exercicio*} (com asterisco).
+      Mas a distinção só será visível se a opção \code{moderador} for usada.    
+    \end{exercicio*}
+
+    \begin{exercicio}
+      Note ainda que VOCÊ precisa cuidar para que as respostas estejam na ordem correta,
+      para que a numeração delas corresponda à dos enunciados.
+    \end{exercicio}
+
+  \end{respostas}
+
+  % ------------- RESOLUÇÕES -------------
+  % Use o ambiente resolucoes para agrupar as respostas dos exercícios.
+  % É isso que distingue as resoluções dos enunciados.
+  \begin{resolucoes}
+
+    O ``gabarido do moderador'' contém as \emph{resoluções} dos exercícios.
+    Ele é exibido apenas se a opção \code{moderador} for usada.  
+    Além disso, se a opção \code{portfolio} for utilizada, os exercícios que foram indicados para o portfólio
+    terão a marca ``(portfólio)'' após a numeração.
+
+    \begin{exercicio}
+      Aqui vem a resolução do exercício.
+    \end{exercicio}
+    
+    \begin{exercicio*}
+      Esta é a resolução do exercício que vai para o portfólio.
+      Como no caso das respostas, a distinção entre os exercícios ordinários e aqueles indicados para o portfólio só aparecerá se a opção \code{moderador} for usada. 
+    \end{exercicio*}
+
+    \begin{exercicio}
+      Note ainda que VOCÊ precisa cuidar para que as resoluções estejam na ordem correta,
+      para que a numeração delas corresponda à dos enunciados.
+    \end{exercicio}
+
+  \end{resolucoes}
+\end{document}
