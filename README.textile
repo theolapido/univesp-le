@@ -4,50 +4,7 @@ Pacote LaTeX para listas de exercícios da Univesp.
 
 h2. Como utilizar
 
-Copie os arquivos @univesp-le.sty@ e @univesp.jpg@ para a pasta de trabalho.
-Veja um exemplo abaixo:
-
-<pre>
-\documentclass[a4paper]{article}
-\usepackage[utf-8]{inputenc}
-\usepackage{univesp-le}
-
-\disciplina{Nome da disciplina}
-\autor{Nome do professor-autor}
-\aulas{1--2}
-
-\begin{document}
-
-  \maketitle
-
-  \begin{exercicio*}\label{ex:qquer}
-    Este é um exercício do portfólio.
-  \end{exercicio*}
-
-  \begin{exercicio}
-    Este é um exercício ordinário fazendo referência ao exercício \label{ex:qquer}.
-  \end{exercicio}
-
-  % Use o ambiente "respostas" para agrupar as respostas.
-  \begin{respostas}
-    \begin{exercicio*}
-      Resposta do exercício do portfólio: não aparece para o aluno (opção "aluno" do pacote),
-      mas aparece para o mediador ("mediador") e para o professor ("professor", opção padrão).
-    \end{exercicio*}
-    ...
-  \end{respostas}
-  
-  % Use o ambiente "resolucoes" para agrupar as resoluções.
-  % Elas aparecerão apenas para os moderadores (opção "moderador") e para o professor ("professor").
-  \begin{resolucoes}
-    \begin{exercicio}
-      Resolução de um exercício.
-    \end{exercicio}
-    ...
-  \end{resolucoes}
-
-\end{document}
-</pre>
+Copie os arquivos @univesp-le.sty@ e @univesp-logo.jpg@ para a pasta de trabalho. Use o arquivo @template.tex@ como ponto de partida. Ele contém exemplos e todas as orientações que você precisará.
 
 h2. Motivação
 
