@@ -58,7 +58,7 @@
 
 % Comprimentos
 \newlength{\@univesp@exerciseskip}
-\setlength{\@univesp@exerciseskip}{0.5\baselineskip plus 0.3pt minus 1pt}
+\setlength{\@univesp@exerciseskip}{1em plus 1pt minus 1pt}
 
 % Rótulos padronizados
 \def\@univesp@subtitle{Lista de exercícios das aulas}
@@ -124,7 +124,7 @@
       \node (a) at ($(current page.south west) + (10mm,10mm)$) {};
       \node (b) at ($(current page.north east) - (10mm,10mm)$) {};
       \filldraw[fill=backgroundblue, even odd rule, draw opacity=0] (current page.south west) rectangle (current page.north east) (a) rectangle (b);
-      \node at ($(current page.north east) - (34mm,20mm)$) {\includegraphics[width=30mm]{univesp-logo}};
+      \node at ($(current page.north east) - (42mm,25mm)$) {\includegraphics[width=40mm]{univesp-logo}};
     \end{tikzpicture}
   }{%
     \if@univesp@atbluepages
@@ -280,7 +280,7 @@
     \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{1.47em}\selectfont%29
     \MakeUppercase{\@univesp@disciplina}%
     \if@univesp@aulasdefined
-      \par
+      \par\vspace{1em}
       \vspace{0.5\@univesp@exerciseskip}
       \noindent
       \fontsize{13pt}{1.47em}\selectfont%19
@@ -289,7 +289,7 @@
   \endgroup
   \par\noindent
   \@author
-  \par
+  \par\vspace{2em}
 }
 
 \renewcommand\footnoterule{{\color{backgroundblue}\rule[2pt]{0.5\textwidth}{0.1pt}}}
