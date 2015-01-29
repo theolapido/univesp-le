@@ -1,0 +1,7 @@
+- BUG: ao usar enumerate em exercicio sem um parágrafo antes, aparece
+  um espaço indesejável, de uma linha, entre o título do exercício e o
+  corpo dele.
+- TODO: remover a implementação da opção "portfolio".
+- TODO: remover as opções "professor" e "moderador". Disponibilizar apenas
+  a opção "aluno", que oculta as respostas. As demais tornaram-se
+  desnecessárias.
