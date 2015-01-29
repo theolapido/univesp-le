@@ -18,9 +18,9 @@
 \RequirePackage{environ}
 \RequirePackage{paralist}
 \RequirePackage{calc}
-\RequirePackage[default,osfigures]{opensans}
-\RequirePackage[bitstream-charter]{mathdesign}
 \RequirePackage[T1]{fontenc}
+\RequirePackage[default,scale=0.96]{opensans} % obs.: scale=0.96 para obter a fonte com tamanho 11.5 pt.
+\RequirePackage[bitstream-charter]{mathdesign}
 
 % Flags
 \newif\if@univesp@showanswer
@@ -108,11 +108,11 @@
   \color{foregroundblue}%
   \rule[0.5em]{\textwidth}{0.1pt}\\%
   \color{foregroundblue}%
-  \mdseries\upshape\fontsize{7.5}{1.47em}\selectfont%11
+  \fontseries{l}\upshape\fontsize{7.5}{13}\selectfont
   \@univesp@disciplina
   \textbf{~/~\@univesp@lfoot~\@univesp@aulas}%
   \hfill
-  \fontsize{9}{1.47em}\selectfont%13
+  \fontsize{9}{15}\selectfont
   \thepage
 }
 
@@ -166,7 +166,7 @@
   \par
   \noindent
   \begingroup
-    \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
+    \bfseries\upshape\fontsize{11}{19}\selectfont
     \color{foregroundblue}%
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
   \endgroup
@@ -192,7 +192,7 @@
   \par
   \noindent
   \begingroup
-    \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
+    \bfseries\upshape\fontsize{11pt}{19}\selectfont
     \color{foregroundblue}%
     \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
     \if@showportfolio
@@ -230,7 +230,7 @@
     \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
-      \bfseries\upshape\fontsize{20pt}{1.47em}\selectfont%29
+      \bfseries\upshape\fontsize{20}{34}\selectfont
       \color{foregroundblue}%
       \MakeUppercase{\@univesp@answerstitle}%
     \endgroup
@@ -250,7 +250,7 @@
     \global\@univesp@atbluepagestrue%
     \noindent
     \begingroup
-      \bfseries\upshape\fontsize{20pt}{1.47em}\selectfont%29
+      \bfseries\upshape\fontsize{20}{34}\selectfont
       \color{foregroundblue}%
       \MakeUppercase{\@univesp@solutiontitle}%
     \endgroup
@@ -289,13 +289,13 @@
   \par\vspace*{30mm}%
   \noindent
   \begingroup
-    \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{1.47em}\selectfont%29
+    \bfseries\upshape\color{foregroundblue}\fontsize{20}{34}\selectfont
     \MakeUppercase{\@univesp@disciplina}%
     \if@univesp@aulasdefined
       \par
       \vspace{\baselineskip}
       \noindent
-      \fontsize{13pt}{1.47em}\selectfont%19
+      \fontsize{13}{22}\selectfont
       \MakeUppercase{\@univesp@subtitle~\@univesp@aulas}%
     \fi
   \endgroup
@@ -337,7 +337,7 @@
 
 % Define a fonte padrão do documento.
 \AtBeginDocument{%
-  \sffamily\mdseries\upshape\fontsize{12pt}{19.5}\selectfont
+  \sffamily\fontseries{l}\upshape\fontsize{12pt}{20}\selectfont
   \@univesp@maketitle
 }
 

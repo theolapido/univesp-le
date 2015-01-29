@@ -1,22 +1,16 @@
 \documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
 
-% Fonte sem serifa com suporte a expressões matemáticas
-\usepackage[default,osfigures]{opensans}
-\usepackage[bitstream-charter]{mathdesign}
-\usepackage[T1]{fontenc}
-
 % Pacote que define o layout da lista de exercícios
 % Opções:
 % professor   Exibe as respostas e as resoluções (PADRÃO)
 % mediador    Exibe apenas as resoluções. Deve ser usado para gerar a versão da lista para os moderadores.
 % aluno       Exibe apenas as respostas. Deve ser usado para gerar a versão da lista para os alunos.
-\usepackage[aluno]{univesp-le}
+\usepackage{univesp-le}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{siunitx}
-\sisetup{locale=FR}
 \usepackage{paralist}
 \usepackage{wasysym}
 \usepackage{hyperref}
@@ -36,6 +30,8 @@
 \hyphenation{Sa-ben-do Ga-ni-me-des trans-la-ção mo-ver par-tí-cu-las}
 
 \begin{document}
+
+\sisetup{locale=FR}
 
 % Imprime o nome da disciplina, do professor-autor e as aulas às quais a lista de exercício refere-se
 %\maketitle
