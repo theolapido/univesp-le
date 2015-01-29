@@ -23,27 +23,19 @@
 \RequirePackage[bitstream-charter]{mathdesign}
 
 % Flags
-\newif\if@univesp@showanswer
-\newif\if@univesp@showsolution
-\newif\if@univesp@aulasdefined
-\newif\if@univesp@atquery
-\newif\if@univesp@atanswer
-\newif\if@univesp@atsolution
-\newif\if@univesp@atbluepages
-\newif\if@tostudent
-\newif\if@atinlineenum
-\newif\if@showportfolio
+\newif\if@opt@aluno
+\newif\if@at@queries
+\newif\if@at@answers
+\newif\if@at@solutions
+\newif\if@at@bluepages
+\newif\if@at@inlineenum
 
-\global\@univesp@showanswerfalse
-\global\@univesp@showsolutionfalse
-\global\@univesp@aulasdefinedfalse
-\global\@univesp@atquerytrue
-\global\@univesp@atanswerfalse
-\global\@univesp@atsolutionfalse
-\global\@univesp@atbluepagesfalse
-\global\@tostudentfalse
-\global\@atinlineenumfalse
-\global\@showportfoliofalse
+\global\@opt@alunofalse
+\global\@at@queriestrue
+\global\@at@answersfalse
+\global\@at@solutionsfalse
+\global\@at@bluepagesfalse
+\global\@at@inlineenumfalse
 
 % Contadores
 \newcounter{exercicio}
@@ -57,44 +49,23 @@
 \definecolor{anotherblue}{rgb}{0.870,0.910,0.957}
 
 % Comprimentos
-\newlength{\@univesp@exerciseskip}
-\setlength{\@univesp@exerciseskip}{2\baselineskip}
+\newlength{\@EXERCISESKIP}
+\setlength{\@EXERCISESKIP}{\baselineskip}
 
 % Rótulos padronizados
-\def\@univesp@subtitle{Lista de exercícios das aulas}
-\def\@univesp@lfoot{Exercícios das aulas}
-\def\@univesp@exerciselabel{Exercício}
-\def\@univesp@answerstitle{Gabarito}
-\def\@univesp@solutiontitle{Gabarito do mediador}
-\def\@univesp@answerunavailable{Resposta não disponível: este exercício faz parte do portfólio.}
-\def\@univesp@portfolio{(portfólio)}
-
-\DeclareOption{portfolio}{%
-  \global\@showportfoliotrue
-}
-
-% Esta opção faz com que apenas as resoluções sejam exibidas, além dos enunciados.
-\DeclareOption{mediador}{%
-  \global\@univesp@showanswerfalse%
-  \global\@univesp@showsolutiontrue%
-  \global\@tostudentfalse%
-}
+\def\@SUBTITLE{Lista de exercícios das aulas}
+\def\@LFOOT{Exercícios das aulas}
+\def\@EXERCISELABEL{Exercício}
+\def\@ANSWERTITLE{Gabarito}
+\def\@SOLUTIONTITLE{Gabarito do mediador}
+\def\@ANSWERUNAVAILABLE{Resposta não disponível: este exercício faz parte do portfólio.}
+\def\@PORTFOLIO{(portfólio)}
 
 % Esta opção faz com que apenas as respostas sejam exibidas, além dos enunciados.
 \DeclareOption{aluno}{%
-  \global\@univesp@showanswertrue%
-  \global\@univesp@showsolutionfalse%
-  \global\@tostudenttrue%
+  \global\@opt@alunotrue%
 }
 
-% Esta opção (padrão) faz com que as respostas e as resoluções sejam exibidas, além dos enunciados.
-\DeclareOption{professor}{%
-  \global\@univesp@showanswertrue%
-  \global\@univesp@showsolutiontrue%
-  \global\@tostudentfalse%
-}
-
-\ExecuteOptions{professor,portfolio}
 \ProcessOptions\relax
 
 % Necessário para fazer cálculos de posicionamento de \node's do TikZ, na decoração das páginas.
@@ -110,7 +81,7 @@
   \color{foregroundblue}%
   \mdseries\upshape\fontsize{7.5}{13}\selectfont
   \@univesp@disciplina
-  \textbf{~/~\@univesp@lfoot~\@univesp@aulas}%
+  \textbf{~/~\@LFOOT~\@univesp@aulas}%
   \hfill
   \fontsize{9}{15}\selectfont
   \thepage
@@ -127,7 +98,7 @@
       \node at ($(current page.north east) - (42mm,25mm)$) {\includegraphics[width=40mm]{univesp-logo}};
     \end{tikzpicture}
   }{%
-    \if@univesp@atbluepages
+    \if@at@bluepages
       % Decoração das páginas de gabarito
       \begin{tikzpicture}[remember picture, overlay]	
 	\node (a) at ($(current page.south west) + (10mm,10mm)$) {};
@@ -145,13 +116,15 @@
     \fi
   }
 }
+
+
 % Identifica qual contador usar: dos enunciados (\theexercicio), das respostas (\theanswer) ou das resoluções (\thesolution).
 \def\@@stepexercisecounter{
-  \if@univesp@atquery
+  \if@at@queries
     \refstepcounter{exercicio}%
     \gdef\@univesp@exercisecount{\theexercicio}
   \else
-    \if@univesp@atanswer
+    \if@at@answers
       \refstepcounter{answer}%
       \gdef\@univesp@exercisecount{\theanswer}
     \else
@@ -164,95 +137,83 @@
 \NewEnviron{exercicio}{%
   \@@stepexercisecounter
   \par
+  \vspace{\@EXERCISESKIP}
   \noindent
   \begingroup
     \bfseries\upshape\fontsize{11}{19}\selectfont
     \color{foregroundblue}%
-    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
+    \MakeUppercase{\@EXERCISELABEL~\@univesp@exercisecount}%
   \endgroup
   \par
   \addpenalty{+300}%
   \noindent\BODY
   \par
-  \vspace{\@univesp@exerciseskip}
+  \vspace{\@EXERCISESKIP}
 }{%
-  \par
   \addpenalty{-300}%
-  \vspace{\@univesp@exerciseskip}
-}
-
-\def\@body{%
-  \noindent\BODY
-  \par
-  \vspace{\@univesp@exerciseskip}
 }
 % Use o ambiente exercicio* para os exercícios do portfólio.
 \NewEnviron{exercicio*}{%
   \@@stepexercisecounter
   \par
+  \vspace{\@EXERCISESKIP}
   \noindent
   \begingroup
     \bfseries\upshape\fontsize{11pt}{19}\selectfont
     \color{foregroundblue}%
-    \MakeUppercase{\@univesp@exerciselabel~\@univesp@exercisecount}%
-    \if@showportfolio
-      ~\@univesp@portfolio
-    \fi
+    \MakeUppercase{\@EXERCISELABEL~\@univesp@exercisecount}~\@PORTFOLIO
   \endgroup
   \par
-  \addpenalty{-1000}%  
-  \if@univesp@atanswer
-    \if@showportfolio      
-      \if@tostudent
-	\noindent
-	\@univesp@answerunavailable
-      \else
-	\@body
-      \fi
+  \addpenalty{-1000}%
+  \noindent
+  \if@at@answers     
+    \if@opt@aluno
+      \noindent
+      \@ANSWERUNAVAILABLE
     \else
-      \@body
-    \fi    
+      \BODY
+    \fi   
   \else
-    \@body
-  \fi  
-}{%
+    \BODY
+  \fi
   \par
+  \vspace{\@EXERCISESKIP}
+}{%
   \addpenalty{+300}%
-  \vspace{\@univesp@exerciseskip}
 }
 % Coloque as respostas dentro do ambiente respostas.
 \NewEnviron{respostas}{
-  \if@univesp@showanswer
-    \newpage
-    \global\@univesp@atqueryfalse%
-    \global\@univesp@atanswertrue%
-    \global\@univesp@atsolutionfalse%
-    \global\@univesp@atbluepagestrue%
-    \noindent
-    \begingroup
-      \bfseries\upshape\fontsize{20}{34}\selectfont
-      \color{foregroundblue}%
-      \MakeUppercase{\@univesp@answerstitle}%
-    \endgroup
-    \par    
-    \setcounter{exercicio}{0}% 
-    \vspace{\baselineskip}%
-    \BODY
-  \fi
+  \newpage
+  \global\@at@queriesfalse%
+  \global\@at@answerstrue%
+  \global\@at@solutionsfalse%
+  \global\@at@bluepagestrue%
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{20}{34}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@ANSWERTITLE}%
+  \endgroup
+  \par    
+  \setcounter{exercicio}{0}% 
+  \vspace{\baselineskip}%
+  \BODY
 }{}
 % Coloque as resoluções dentro do ambiente resolucoes
 \NewEnviron{resolucoes}{
-  \if@univesp@showsolution
+  \if@opt@aluno
+    \relax
+  \else
     \newpage
-    \global\@univesp@atqueryfalse%
-    \global\@univesp@atanswerfalse%
-    \global\@univesp@atsolutiontrue%
-    \global\@univesp@atbluepagestrue%
+    \global\@at@queriesfalse%
+    \global\@at@answersfalse%
+    \global\@at@solutionstrue%
+    \global\@at@bluepagestrue%
     \noindent
     \begingroup
       \bfseries\upshape\fontsize{20}{34}\selectfont
       \color{foregroundblue}%
-      \MakeUppercase{\@univesp@solutiontitle}%
+      \MakeUppercase{\@SOLUTIONTITLE}%
     \endgroup
     \par
     \setcounter{exercicio}{0}%
@@ -277,10 +238,9 @@
 
 % Define as aulas às quais os exercícios se referem.
 % TODO: implementar uma maneira de definir se há uma ou mais aulas,
-% e fazer com que o \def\@univesp@lfoot reflita a mudança singular/plural
+% e fazer com que o \def\@LFOOT reflita a mudança singular/plural
 \providecommand\aulas[1]{{%
   \gdef\@univesp@aulas{#1}
-  \global\@univesp@aulasdefinedtrue
 }}
 
 % Redefine o comando \maketitle para exibir o nome da disciplina, as aulas às quais os exercícios se referem e o professor autor da lista.
@@ -291,17 +251,15 @@
   \begingroup
     \bfseries\upshape\color{foregroundblue}\fontsize{20}{34}\selectfont
     \MakeUppercase{\@univesp@disciplina}%
-    \if@univesp@aulasdefined
-      \par
-      \vspace{\baselineskip}
-      \noindent
-      \fontsize{13}{22}\selectfont
-      \MakeUppercase{\@univesp@subtitle~\@univesp@aulas}%
-    \fi
+    \par
+    \vspace{\baselineskip}
+    \noindent
+    \fontsize{13}{22}\selectfont
+    \MakeUppercase{\@SUBTITLE~\@univesp@aulas}%
   \endgroup
   \par\noindent
   \@author
-  \par\vspace{2\baselineskip}
+  \par\vspace{\baselineskip}
 }
 
 \renewcommand\footnoterule{{\color{backgroundblue}\noindent\rule[2pt]{0.5\textwidth}{0.1pt}}}
@@ -319,15 +277,15 @@
 
 % Use o ambiente inlineenum para criar uma lista de itens de exercício sem iniciar um novo parágrafo para cada item.
 \newenvironment{inlineenum}{%
-  \@atinlineenumtrue
+  \@at@inlineenumtrue
   \setcounter{inlineenumcounter}{0}%
 }{%
-  \@atinlineenumfalse
+  \@at@inlineenumfalse
 }
 
 % Use o comando \inlineitem para iniciar um novo item DENTRO de um ambiente inlineenum
 \providecommand\inlineitem{%
-  \if@atinlineenum
+  \if@at@inlineenum
     \stepcounter{inlineenumcounter}%
     \begingroup
       \bfseries\color{foregroundblue}(\alph{inlineenumcounter})
@@ -340,6 +298,5 @@
   \sffamily\mdseries\upshape\fontsize{12pt}{20}\selectfont
   \@univesp@maketitle
 }
-
 
 \endinput
