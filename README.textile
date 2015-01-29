@@ -4,7 +4,7 @@ Pacote LaTeX para listas de exercícios da Univesp.
 
 h2. Como utilizar
 
-Copie os arquivos @univesp-le.sty@ e @univesp-logo.jpg@ para a pasta de trabalho. Use o arquivo @template.tex@ como ponto de partida: ele contém exemplos e todas as orientações que você precisará.
+Copie os arquivos @univesp-le.sty@ e @univesp-logo.jpg@ para a pasta de trabalho. Use o arquivo @template.tex@ como ponto de partida: ele contém exemplos e todas as orientações que você precisará. O arquivo example/example.pdf dá uma ideia do resultado.
 
 h2. Motivação
 
@@ -16,5 +16,5 @@ Deste modo, o intuito deste projeto é fornecer ao professor-autor um estilo LaT
 
 h2. Licenças
 
-* @univesp.jpg@ - Copyright Univesp
+* @univesp-logo.jpg@ - Copyright Univesp
 * Demais arquivos (inclusive @univesp-le.sty@) - "Creative Commons BY-SA International 4.0":http://creativecommons.org/licenses/by-sa/4.0/
