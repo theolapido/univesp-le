@@ -58,7 +58,7 @@
 
 % Comprimentos
 \newlength{\@univesp@exerciseskip}
-\setlength{\@univesp@exerciseskip}{1em plus 1pt minus 1pt}
+\setlength{\@univesp@exerciseskip}{2\baselineskip}
 
 % Rótulos padronizados
 \def\@univesp@subtitle{Lista de exercícios das aulas}
@@ -163,7 +163,7 @@
 % Use o ambiente exercicio para os exercícios ordinários.
 \NewEnviron{exercicio}{%
   \@@stepexercisecounter
-  \par\vspace{\@univesp@exerciseskip}
+  \par
   \noindent
   \begingroup
     \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
@@ -173,14 +173,23 @@
   \par
   \addpenalty{+300}%
   \noindent\BODY
+  \par
+  \vspace{\@univesp@exerciseskip}
 }{%
   \par
   \addpenalty{-300}%
+  \vspace{\@univesp@exerciseskip}
+}
+
+\def\@body{%
+  \noindent\BODY
+  \par
+  \vspace{\@univesp@exerciseskip}
 }
 % Use o ambiente exercicio* para os exercícios do portfólio.
 \NewEnviron{exercicio*}{%
   \@@stepexercisecounter
-  \par\vspace{\@univesp@exerciseskip}
+  \par
   \noindent
   \begingroup
     \bfseries\upshape\fontsize{11pt}{1.47em}\selectfont%16
@@ -198,17 +207,18 @@
 	\noindent
 	\@univesp@answerunavailable
       \else
-	\noindent\BODY
+	\@body
       \fi
     \else
-      \noindent\BODY
+      \@body
     \fi    
   \else
-    \noindent\BODY
+    \@body
   \fi  
 }{%
   \par
   \addpenalty{+300}%
+  \vspace{\@univesp@exerciseskip}
 }
 % Coloque as respostas dentro do ambiente respostas.
 \NewEnviron{respostas}{
@@ -224,9 +234,10 @@
       \color{foregroundblue}%
       \MakeUppercase{\@univesp@answerstitle}%
     \endgroup
-    \par
+    \par    
     \setcounter{exercicio}{0}% 
-      \BODY
+    \vspace{\baselineskip}%
+    \BODY
   \fi
 }{}
 % Coloque as resoluções dentro do ambiente resolucoes
@@ -245,6 +256,7 @@
     \endgroup
     \par
     \setcounter{exercicio}{0}%
+    \vspace{\baselineskip}%
     \BODY
   \fi
 }{}
@@ -280,8 +292,8 @@
     \bfseries\upshape\color{foregroundblue}\fontsize{20pt}{1.47em}\selectfont%29
     \MakeUppercase{\@univesp@disciplina}%
     \if@univesp@aulasdefined
-      \par\vspace{1em}
-      \vspace{0.5\@univesp@exerciseskip}
+      \par
+      \vspace{\baselineskip}
       \noindent
       \fontsize{13pt}{1.47em}\selectfont%19
       \MakeUppercase{\@univesp@subtitle~\@univesp@aulas}%
@@ -289,24 +301,26 @@
   \endgroup
   \par\noindent
   \@author
-  \par\vspace{2em}
+  \par\vspace{2\baselineskip}
 }
 
-\renewcommand\footnoterule{{\color{backgroundblue}\rule[2pt]{0.5\textwidth}{0.1pt}}}
+\renewcommand\footnoterule{{\color{backgroundblue}\noindent\rule[2pt]{0.5\textwidth}{0.1pt}}}
 
 % Família-padrão da fonte: sem serifa
 \renewcommand*\familydefault{\sfdefault}
 
-
-
 % Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
 \renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
-\renewenvironment{enumerate}{\begin{compactenum}[\bfseries\color{foregroundblue}(a)]}{\end{compactenum}}
+\renewenvironment{enumerate}{%
+  \begin{compactenum}[\bfseries\color{foregroundblue}(a)]%
+}{%
+  \end{compactenum}%
+}
 
 % Use o ambiente inlineenum para criar uma lista de itens de exercício sem iniciar um novo parágrafo para cada item.
 \newenvironment{inlineenum}{%
   \@atinlineenumtrue
-  \setcounter{inlineenumcounter}{0}  
+  \setcounter{inlineenumcounter}{0}%
 }{%
   \@atinlineenumfalse
 }
@@ -323,7 +337,7 @@
 
 % Define a fonte padrão do documento.
 \AtBeginDocument{%
-  \sffamily\mdseries\upshape\fontsize{11.5pt}{1.47em}\selectfont  %17
+  \sffamily\mdseries\upshape\fontsize{12pt}{19.5}\selectfont
   \@univesp@maketitle
 }
 
