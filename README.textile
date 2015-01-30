@@ -6,6 +6,10 @@ h2. Como utilizar
 
 Copie os arquivos @univesp-le.sty@ e @univesp-logo.jpg@ para a pasta de trabalho (pressione o botão "download zip" à direita). Use o arquivo @template.tex@ como ponto de partida: ele contém exemplos e todas as orientações que você precisará. O arquivo @example/example.pdf@ dá uma ideia do resultado.
 
+h2. Como contribuir
+
+Encontrou algum problema ou tem alguma sugestão? Registre-a "aqui":https://github.com/irpagnossin/univesp-le/issues, criando uma nova _issue_, ou envie um "e-mail":mailto://irpagnossin.edu@gmail.com. Alternativamente, você pode fazer um @git-clone@ do repositório e fazer as alterações por conta própria.
+
 h2. Motivação
 
 Este pacote foi criado com o intuito de simplificar as interações entre a equipe de produção da Univesp e os professores-autores usuários de LaTeX.
