@@ -8,7 +8,7 @@ Copie os arquivos @univesp-le.sty@ e @univesp-logo.jpg@ para a pasta de trabalho
 
 h2. Como contribuir
 
-Encontrou algum problema ou tem alguma sugestão? Registre-a "aqui":https://github.com/irpagnossin/univesp-le/issues, criando uma nova _issue_, ou envie um "e-mail":mailto://irpagnossin.edu@gmail.com. Alternativamente, você pode fazer um @git-clone@ do repositório e fazer as alterações por conta própria.
+Encontrou algum problema ou tem alguma sugestão? Registre-a "aqui":https://github.com/irpagnossin/univesp-le/issues, criando uma nova _issue_, ou envie um "e-mail":mailto:irpagnossin.edu@gmail.com. Alternativamente, você pode fazer um @git-clone@ do repositório e fazer as alterações por conta própria.
 
 h2. Motivação
 
