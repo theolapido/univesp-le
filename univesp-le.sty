@@ -57,8 +57,9 @@
 \def\@LFOOT{Exercícios das aulas}
 \def\@EXERCISELABEL{Exercício}
 \def\@ANSWERTITLE{Gabarito}
-\def\@SOLUTIONTITLE{Gabarito do mediador}
+\def\@SOLUTIONTITLE{Resoluções}
 \def\@ANSWERUNAVAILABLE{Resposta não disponível: este exercício faz parte do portfólio.}
+\def\@SOLUTIONUNAVAILABLE{Resolução não disponível: este exercício faz parte do portfólio.}
 \def\@PORTFOLIO{(portfólio)}
 
 % Esta opção faz com que apenas as respostas sejam exibidas, além dos enunciados.
@@ -166,7 +167,7 @@
   \endgroup
   \par
   \addpenalty{-1000}%
-  \noindent
+  \noindent   
   \if@at@answers     
     \if@opt@aluno
       \noindent
@@ -175,8 +176,16 @@
       \BODY
     \fi   
   \else
-    \BODY
-  \fi
+    \if@at@solutions
+      \if@opt@aluno
+	\@SOLUTIONUNAVAILABLE
+      \else
+	\BODY
+      \fi
+    \else
+      \BODY
+    \fi
+  \fi  
   \par
   \vspace{\@EXERCISESKIP}
 }{%
@@ -202,25 +211,21 @@
 }{}
 % Coloque as resoluções dentro do ambiente resolucoes
 \NewEnviron{resolucoes}{
-  \if@opt@aluno
-    \relax
-  \else
-    \newpage
-    \global\@at@queriesfalse%
-    \global\@at@answersfalse%
-    \global\@at@solutionstrue%
-    \global\@at@bluepagestrue%
-    \noindent
-    \begingroup
-      \bfseries\upshape\fontsize{20}{34}\selectfont
-      \color{foregroundblue}%
-      \MakeUppercase{\@SOLUTIONTITLE}%
-    \endgroup
-    \par
-    \setcounter{exercicio}{0}%
-    \vspace{\baselineskip}%
-    \BODY
-  \fi
+  \newpage
+  \global\@at@queriesfalse%
+  \global\@at@answersfalse%
+  \global\@at@solutionstrue%
+  \global\@at@bluepagestrue%
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{20}{34}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@SOLUTIONTITLE}%
+  \endgroup
+  \par
+  \setcounter{exercicio}{0}%
+  \vspace{\baselineskip}%
+  \BODY
 }{}
 
 % Use \disciplina para definir o nome da disciplina.
