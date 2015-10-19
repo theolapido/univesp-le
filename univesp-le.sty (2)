@@ -1,0 +1,336 @@
+% -----------------------------------------------------------------------------------------
+% Pacote para listas de exercícios da Universidade Virtual do Estado de São Paulo (Univesp)
+% Autor:   Ivan Ramos Pagnossin
+% Data:    Janeiro de 2015
+% Licença: Creative Commons BY-SA International 4.0
+%
+% Package for lists of exercises of Universidade Virtual do Estado de São Paulo (Univesp)
+% Author:  Ivan Ramos Pagnossin
+% Date:    January 2015
+% License: Creative Commons BY-SA International 4.0
+% -----------------------------------------------------------------------------------------
+\ProvidesPackage{univesp-le}[2015/01/22 v0.1 - Lista de exercícios da Univesp]
+\RequirePackage{ifthen}
+\RequirePackage{everypage}
+\RequirePackage[left=52mm, top=22mm, right=22mm, bottom=33mm]{geometry}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{environ}
+\RequirePackage{paralist}
+\RequirePackage{calc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[default,scale=0.96]{opensans} % obs.: scale=0.96 para obter a fonte com tamanho 11.5 pt.
+\RequirePackage[bitstream-charter]{mathdesign}
+
+% Flags
+\newif\if@opt@aluno
+\newif\if@at@queries
+\newif\if@at@answers
+\newif\if@at@solutions
+\newif\if@at@bluepages
+\newif\if@at@inlineenum
+\newif\if@at@aula
+
+\global\@opt@alunofalse
+\global\@at@queriestrue
+\global\@at@answersfalse
+\global\@at@solutionsfalse
+\global\@at@bluepagesfalse
+\global\@at@inlineenumfalse
+\global\@at@aulafalse
+
+% Contadores
+\newcounter{exercicio}
+\newcounter{answer}
+\newcounter{solution}
+\newcounter{inlineenumcounter}
+\newcounter{aulas}
+\newcounter{aula}
+
+% Paleta de cores
+\definecolor{foregroundblue}{rgb}{0.137,0.392,0.706}
+\definecolor{backgroundblue}{rgb}{0.565,0.690,0.843}
+\definecolor{anotherblue}{rgb}{0.870,0.910,0.957}
+\definecolor{black}{rgb}{0,0,0}
+
+% Comprimentos
+\newlength{\@EXERCISESKIP}
+\setlength{\@EXERCISESKIP}{\baselineskip}
+
+% Rótulos padronizados
+\def\@SUBTITLE{Lista de exercícios das aulas}
+\def\@LFOOT{Exercícios das aulas}
+\def\@EXERCISELABEL{Exercício}
+\def\@ANSWERTITLE{Gabarito}
+\def\@SOLUTIONTITLE{Resoluções}
+\def\@ANSWERUNAVAILABLE{Resposta não disponível: este exercício faz parte do portfólio.}
+\def\@SOLUTIONUNAVAILABLE{Resolução não disponível: este exercício faz parte do portfólio.}
+\def\@PORTFOLIO{(portfólio)}
+\def\@AULA{Vídeo-Aula}
+
+% Esta opção faz com que apenas as respostas sejam exibidas, além dos enunciados.
+\DeclareOption{aluno}{%
+  \global\@opt@alunotrue%
+}
+
+\ProcessOptions\relax
+
+% Necessário para fazer cálculos de posicionamento de \node's do TikZ, na decoração das páginas.
+\usetikzlibrary{calc}
+
+% Remove footers
+\pagestyle{empty}
+
+% Rodapé: nome da disciplina, aulas e número da página.
+\def\@univesp@foot{%
+  \color{foregroundblue}%
+  \rule[0.5em]{\textwidth}{0.1pt}\\%
+  \color{foregroundblue}%
+  \mdseries\upshape\fontsize{7.5}{13}\selectfont
+  \@univesp@disciplina
+  \textbf{~/~\@LFOOT~\@univesp@aulas}%
+  \hfill
+  \fontsize{9}{15}\selectfont
+  \thepage
+}
+
+% Nas mudanças de página (\shipout's), altera a decoração da página.
+\AddEverypageHook{%
+  \ifthenelse{\equal{\thepage}{1}}{%
+    % Decoração da primeira página
+    \begin{tikzpicture}[remember picture, overlay]
+      \node (a) at ($(current page.south west) + (10mm,10mm)$) {};
+      \node (b) at ($(current page.north east) - (10mm,10mm)$) {};
+      \filldraw[fill=backgroundblue, even odd rule, draw opacity=0] (current page.south west) rectangle (current page.north east) (a) rectangle (b);
+      \node at ($(current page.north east) - (42mm,25mm)$) {\includegraphics[width=40mm]{univesp-logo}};
+    \end{tikzpicture}
+  }{%
+    \if@at@bluepages
+      % Decoração das páginas de gabarito
+      \begin{tikzpicture}[remember picture, overlay]
+	\node (a) at ($(current page.south west) + (10mm,10mm)$) {};
+	\node (b) at ($(current page.north east) - (10mm,10mm)$) {};
+	\filldraw[fill=anotherblue,even odd rule, draw opacity=0] (a) rectangle (b);
+	\node[align=left] at ($(current page.south west) + (50mm, 14mm)$) [anchor=west] {\@univesp@foot};
+      \end{tikzpicture}
+    \else
+      % Decoração das páginas de enunciados (exceto a primeira)
+      \begin{tikzpicture}[remember picture, overlay]
+	\node (a) at ($(current page.north west) - (0mm, 165mm)$) {};
+	\node (b) at ($(current page.north west) + (31mm, 0mm)$) {};
+	\draw[color=backgroundblue, ultra thick] (a) -- (b);
+	\node[align=left] at ($(current page.south west) + (50mm, 14mm)$) [anchor=west] {\@univesp@foot};
+      \end{tikzpicture}
+    \fi
+  }
+}
+
+%Marca o contador de aulas (é necessário avisar no preambulo qual a primeira aula do pdf com \setcounter{aula}{XX})
+\refstepcounter{aula}
+\gdef\@univesp@aulacount{\theaula}
+
+% Identifica qual contador usar: dos enunciados (\theexercicio), das respostas (\theanswer), das aulas (\theaulas) ou das resoluções (\thesolution).
+\def\@@stepexercisecounter{
+  \if@at@queries
+    \refstepcounter{exercicio}%
+    \gdef\@univesp@exercisecount{\theexercicio}
+  \else
+    \if@at@answers
+      \refstepcounter{answer}%
+      \gdef\@univesp@exercisecount{\theanswer}
+    \else
+      \if@at@aula
+        \refstepcounter{aulas}
+        \gdef\@univesp@exercisecount{\theaulas}
+      \else
+        \refstepcounter{solution}%
+        \gdef\@univesp@exercisecount{\thesolution}
+    \fi
+  \fi
+}
+% Use o ambiente exercicio para os exercícios ordinários.
+\NewEnviron{exercicio}{%
+  \@@stepexercisecounter
+  \par
+  \vspace{\@EXERCISESKIP}
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{11}{19}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@EXERCISELABEL~\@univesp@exercisecount}%
+  \endgroup
+  \par
+  \addpenalty{+300}%
+  \noindent\BODY
+  \par
+  \vspace{\@EXERCISESKIP}
+}{%
+  \addpenalty{-300}%
+}
+% Use o ambiente exercicio* para os exercícios do portfólio.
+\NewEnviron{exercicio*}{%
+  \@@stepexercisecounter
+  \par
+  \vspace{\@EXERCISESKIP}
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{11pt}{19}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@EXERCISELABEL~\@univesp@exercisecount}~\@PORTFOLIO
+  \endgroup
+  \par
+  \addpenalty{-1000}%
+  \noindent
+  \if@at@answers
+    \if@opt@aluno
+      \noindent
+      \@ANSWERUNAVAILABLE
+    \else
+      \BODY
+    \fi
+  \else
+    \if@at@solutions
+      \if@opt@aluno
+	\@SOLUTIONUNAVAILABLE
+      \else
+	\BODY
+      \fi
+    \else
+      \BODY
+    \fi
+  \fi
+  \par
+  \vspace{\@EXERCISESKIP}
+}{%
+  \addpenalty{+300}%
+}
+% Coloque as respostas dentro do ambiente respostas.
+\NewEnviron{respostas}{
+  \newpage
+  \global\@at@queriesfalse%
+  \global\@at@answerstrue%
+  \global\@at@solutionsfalse%
+  \global\@at@bluepagestrue%
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{20}{34}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@ANSWERTITLE}%
+  \endgroup
+  \par
+  \vspace{\baselineskip}%
+  \BODY
+}{}
+% Coloque os exercícios dentro do ambiente aula.
+\NewEnviron{aula}{
+\@@stepexercisecounter
+\global\@at@aulatrue
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{16}{25}\selectfont
+    \color{black}%
+    \Make{\@AULA~\@univesp@aulacount}%
+  \endgroup
+  \par
+  \stepcounter{aula}%
+  \setcounter{aulas}{0}%
+  \setcounter{exercicio}{0}%
+  \vspace{\baselineskip}%
+  \BODY
+}{}
+% Coloque as resoluções dentro do ambiente resolucoes
+\NewEnviron{resolucoes}{
+  \newpage
+  \global\@at@queriesfalse%
+  \global\@at@answersfalse%
+  \global\@at@solutionstrue%
+  \global\@at@bluepagestrue%
+  \noindent
+  \begingroup
+    \bfseries\upshape\fontsize{20}{34}\selectfont
+    \color{foregroundblue}%
+    \MakeUppercase{\@SOLUTIONTITLE}%
+  \endgroup
+  \par
+  \vspace{\baselineskip}%
+  \BODY
+}{}
+
+% Use \disciplina para definir o nome da disciplina.
+% \title = \disciplina
+\providecommand\disciplina[1]{%
+  \title{#1}%
+}
+\renewcommand\title[1]{
+  \gdef\@univesp@disciplina{#1}
+}
+
+% \autor = \author
+\providecommand\autor[1]{%
+  \author{#1}%
+}
+
+% Define as aulas às quais os exercícios se referem.
+% TODO: implementar uma maneira de definir se há uma ou mais aulas,
+% e fazer com que o \def\@LFOOT reflita a mudança singular/plural
+\providecommand\aulas[1]{{%
+  \gdef\@univesp@aulas{#1}
+}}
+
+% Redefine o comando \maketitle para exibir o nome da disciplina, as aulas às quais os exercícios se referem e o professor autor da lista.
+\let\maketitle=\relax
+\newcommand\@univesp@maketitle{
+  \par\vspace*{30mm}%
+  \noindent
+  \begingroup
+    \bfseries\upshape\color{foregroundblue}\fontsize{20}{34}\selectfont
+    \MakeUppercase{\@univesp@disciplina}%
+    \par
+    \vspace{\baselineskip}
+    \noindent
+    \fontsize{13}{22}\selectfont
+    \MakeUppercase{\@SUBTITLE~\@univesp@aulas}%
+  \endgroup
+  \par\noindent
+  \@author
+  \par\vspace{\baselineskip}
+}
+
+\renewcommand\footnoterule{{\color{backgroundblue}\noindent\rule[2pt]{0.5\textwidth}{0.1pt}}}
+
+% Família-padrão da fonte: sem serifa
+\renewcommand*\familydefault{\sfdefault}
+
+% Para as listas, usa a versão do pacote paralist, com cor e numeração personalizadas no caso do enumerate
+\renewenvironment{itemize}{\begin{compactitem}}{\end{compactitem}}
+\renewenvironment{enumerate}{%
+  \begin{compactenum}[\bfseries\color{foregroundblue}(a)]%
+}{%
+  \end{compactenum}%
+}
+
+% Use o ambiente inlineenum para criar uma lista de itens de exercício sem iniciar um novo parágrafo para cada item.
+\newenvironment{inlineenum}{%
+  \@at@inlineenumtrue
+  \setcounter{inlineenumcounter}{0}%
+}{%
+  \@at@inlineenumfalse
+}
+
+% Use o comando \inlineitem para iniciar um novo item DENTRO de um ambiente inlineenum
+\providecommand\inlineitem{%
+  \if@at@inlineenum
+    \stepcounter{inlineenumcounter}%
+    \begingroup
+      \bfseries\color{foregroundblue}(\alph{inlineenumcounter})
+    \endgroup
+  \fi
+}
+
+% Define a fonte padrão do documento.
+\AtBeginDocument{%
+  \sffamily\mdseries\upshape\fontsize{12pt}{20}\selectfont
+  \@univesp@maketitle
+}
+
+\endinput
